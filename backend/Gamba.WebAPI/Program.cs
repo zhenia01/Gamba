@@ -1,9 +1,34 @@
+using Gamba.DataAccess.BuildingBlocks;
+using Gamba.DataAccess.Users;
+using Gamba.DataAccess.Users.Rules;
+using Gamba.Infrastructure.Database;
+using Gamba.WebAPI.Features;
+using Gamba.WebAPI.SeedWork;
+using Hellang.Middleware.ProblemDetails;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddUserModule();
+
+builder.Services.AddDbContext<GambaContext>(
+    opt => opt.UseNpgsql("Host=host.docker.internal:49153;Username=postgres;Password=postgrespw;Database=GambaTest"));
+
+builder.Services.AddProblemDetails(opt =>
+{
+    opt.IncludeExceptionDetails = (_, _) => builder.Environment.IsDevelopment();
+    
+    opt.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+});
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
+
+app.UseProblemDetails();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -14,6 +39,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => Results.Ok());
+app.MapUserModule();
 
 app.Run();
