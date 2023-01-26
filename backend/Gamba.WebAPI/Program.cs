@@ -5,6 +5,7 @@ using Gamba.Infrastructure.Database;
 using Gamba.WebAPI.Features;
 using Gamba.WebAPI.SeedWork;
 using Hellang.Middleware.ProblemDetails;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddUserModule();
+builder.Services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+builder.Services.AddFeatureModules();
 
 builder.Services.AddDbContext<GambaContext>(
     opt => opt.UseNpgsql("Host=host.docker.internal:49153;Username=postgres;Password=postgrespw;Database=GambaTest"));
