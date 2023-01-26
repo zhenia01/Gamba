@@ -1,8 +1,7 @@
+using Gamba.Application.Users.RegisterUser;
 using Gamba.DataAccess.BuildingBlocks;
-using Gamba.DataAccess.Users;
-using Gamba.DataAccess.Users.Rules;
 using Gamba.Infrastructure.Database;
-using Gamba.WebAPI.Features;
+using Gamba.WebAPI.Configuration;
 using Gamba.WebAPI.SeedWork;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
@@ -41,6 +40,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapUserModule();
+app.MapFeatureModulesEndpoints();
 
 app.Run();

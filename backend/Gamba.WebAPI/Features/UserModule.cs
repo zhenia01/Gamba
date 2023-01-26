@@ -1,28 +1,36 @@
-﻿using Gamba.Application.Users;
+﻿using Gamba.Application.Configuration.Commands;
+using Gamba.Application.Users;
 using Gamba.Application.Users.DomainServices;
+using Gamba.Application.Users.RegisterUser;
 using Gamba.DataAccess.Users;
 using Gamba.Infrastructure.Domain.Users;
+using Gamba.WebAPI.Features.SeedWork;
+using MediatR;
 
 namespace Gamba.WebAPI.Features;
 
-public static class UserModule
+public class UserModule: IFeatureModule
 {
-    public static void AddUserModule(this IServiceCollection services)
+    public IServiceCollection RegisterModule(IServiceCollection services)
     {
         services.AddTransient<IUserUniquenessChecker, UserUniquenessChecker>();
         services.AddTransient<UserRepository>();
-        services.AddTransient<UserService>();
-    }
-    
-    public static void MapUserModule(this IEndpointRouteBuilder builder)
-    {
-        builder.MapGroup("users")
-            .MapPost("/", RegisterUser);
+        
+        return services;
     }
 
-    private static async Task<IResult> RegisterUser(string name, string password, UserService userService)
+    public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        var user = await userService.CreateRegisteredUser(name, password);
-        return TypedResults.Created($"/users/{user.Id}", user);
+        endpoints.MapGroup("users")
+            .MapPost("/", RegisterUser);
+        
+        return endpoints;
+    }
+
+    private static async Task<IResult> RegisterUser(string name, string password,
+        IMediator dispatcher)
+    {
+        var id = await dispatcher.Send(new RegisterUserCommand(name, password));
+        return TypedResults.Created($"/users/{id}");
     }
 }
