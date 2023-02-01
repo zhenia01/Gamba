@@ -1,14 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import jotaiDebugLabel from 'jotai/babel/plugin-debug-label'
-import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh'
-
+import react from '@vitejs/plugin-react';
+import { fileURLToPath, URL } from 'url';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
+// eslint-disable-next-line import/no-default-export
 export default defineConfig({
-  plugins: [react({
-    babel: {
-      plugins: [jotaiDebugLabel, jotaiReactRefresh]
-    }
-  })]
-})
+  plugins: [react()],
+  resolve: {
+    alias: {
+      // eslint-disable-next-line @typescript-eslint/quotes
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+});
