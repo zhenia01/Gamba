@@ -41,11 +41,7 @@ builder.WebHost.UseUrls("http://*:5050");
 
 var app = builder.Build();
 
-using (var scope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
-{
-    using var context = scope.ServiceProvider.GetRequiredService<GambaContext>();
-    context.Database.Migrate();
-};
+app.UseDatabaseMigrate();
 
 app.UseCors();
 
