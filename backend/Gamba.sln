@@ -15,6 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{10C8187B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.UnitTests", "Gamba.UnitTests\Gamba.UnitTests.csproj", "{44013103-B8D0-44BE-B43A-A4D271DA1707}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93199E7E-355B-4233-B615-D8972BB309F9}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.apps.yml = docker-compose.apps.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

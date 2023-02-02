@@ -16,7 +16,10 @@ builder.Services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
 builder.Services.AddFeatureModules();
 
 builder.Services.AddDbContext<GambaContext>(
-    opt => opt.UseNpgsql("Host=host.docker.internal:49153;Username=postgres;Password=postgrespw;Database=GambaTest"));
+    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("Gamba"), options =>
+    {
+        options.MigrationsAssembly(typeof(GambaContext).Assembly.GetName().Name);
+    }));
 
 builder.Services.AddProblemDetails(opt =>
 {
@@ -29,12 +32,20 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(p =>
 {
-    p.WithOrigins("http://127.0.0.1:5173")
+    p.WithOrigins(builder.Configuration["ClientUrl"]!)
         .AllowAnyHeader()
         .AllowAnyMethod();
 }));
 
+builder.WebHost.UseUrls("http://*:5050");
+
 var app = builder.Build();
+
+using (var scope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
+{
+    using var context = scope.ServiceProvider.GetRequiredService<GambaContext>();
+    context.Database.Migrate();
+};
 
 app.UseCors();
 
