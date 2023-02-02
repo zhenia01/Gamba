@@ -1,0 +1,38 @@
+﻿version: '3.8'
+services:
+  gamba_back-end:
+    image: gamba_back-end
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: 'gamba_back-end'
+    restart: on-failure
+    ports:
+      - "5050:5050"
+    networks:
+      - back
+    environment:
+      ASPNETCORE_ENVIRONMENT: 'Development'
+      ClientUrl: 'http://localhost:5173'
+      ConnectionStrings__Gamba: 'Host=postgres;Port=5432;Username=postgres;Password=postgrespw;Database=Gamba'
+  gamba_front-end:
+    depends_on:
+      - gamba_back-end
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: 'gamba_front-end'
+    restart: on-failure
+    ports:
+      - "5173:80"
+    networks:
+      - back
+      - front
+    environment:
+      VITE_API_ORIGIN_URL: 'http://localhost:5050'
+
+networks:
+  back:
+    driver: bridge
+  front:
+    driver: bridge
