@@ -3,4 +3,4 @@ using Gamba.Application.Users.Common;
 
 namespace Gamba.Application.Users.RegisterUser;
 
-public record RegisterUserCommand(string Name, string Password): ICommand<UserDto>;
+public record RegisterUserCommand(string Name, string Password): ICommand<(UserDto user, string token)>;

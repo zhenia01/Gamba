@@ -45,4 +45,6 @@ public class User : Entity, IAggregateRoot
     {
         _followingCreators.Add(UserCreator.AddFollower(this, creator));
     }
+
+    public bool VerifyPassword(Predicate<string> checker) => checker(_password);
 }

@@ -25,6 +25,13 @@ namespace Gamba.Infrastructure.Domain.Users
                 .IncludePaths(UserEntityTypeConfiguration.FollowingCreatorsList)
                 .SingleAsync(x => x.Id == id);
         }
+        
+        public Task<User> GetByName(string name)
+        {
+            return _context.Users
+                .IncludePaths(UserEntityTypeConfiguration.FollowingCreatorsList)
+                .SingleAsync(x => x.Name == name);
+        }
 
         public Task SaveChanges()
         {
