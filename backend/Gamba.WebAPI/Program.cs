@@ -9,10 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddJwtAuth(builder.Configuration);
+
+builder.Services.AddSwagger();
 
 builder.Services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+
 builder.Services.AddFeatureModules();
 
 builder.Services.AddDbContext<GambaContext>(
@@ -50,9 +52,10 @@ app.UseProblemDetails();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDev();
 }
+
+app.UseAuth();
 
 app.UseHttpsRedirection();
 
