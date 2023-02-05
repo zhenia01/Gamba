@@ -6,13 +6,12 @@ import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
 
 import * as auth from '@/features/auth';
 import { Home } from '@/pages/Home';
-import { Root, rootLoader } from '@/pages/Root';
+import { Root } from '@/pages/Root';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root/>,
-    // loader: rootLoader,
     errorElement:
       <div>
         Error occurred!
