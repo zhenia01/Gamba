@@ -10,7 +10,10 @@ type AuthState = {
   token?: string
 };
 
-const initialState: AuthState = {};
+const initialState: AuthState = {
+  user: undefined,
+  token: undefined,
+};
 
 type AuthActions = {
   signIn: (request: SignInRequestDto) => void,
