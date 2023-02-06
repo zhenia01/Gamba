@@ -23,7 +23,8 @@ class Http {
       queryParams,
     } = options;
 
-    const body = (typeof payload === 'object') ? JSON.stringify(payload) : payload;
+    const body = (typeof payload === 'object' && payload) ? JSON.stringify(payload) : payload;
+
     const headers = this.getHeaders(contentType, hasAuth);
 
     return fetch(this.getUrlWithQueryParams(url, queryParams), {
