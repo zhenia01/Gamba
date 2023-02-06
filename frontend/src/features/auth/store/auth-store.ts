@@ -10,21 +10,26 @@ type AuthState = {
   token?: string
 };
 
+const initialState: AuthState = {
+  user: undefined,
+  token: undefined,
+};
+
 type AuthActions = {
   signIn: (request: SignInRequestDto) => void,
   signUp: (request: SignUpRequestDto) => void,
   signOut: () => void,
-  updateCurrentUser: () => void
+  loadCurrentUser: () => void
 };
 
 const useAuthStore = create<AuthState>()(
-  persist((_) => ({
-    user: undefined,
-    token: undefined,
-  }), {
-    name: 'auth',
-    partialize: (state) => state.token,
-  }),
+  persist(
+    (_) => ({ ...initialState }),
+    {
+      name: 'auth',
+      partialize: (state) => ({ token: state.token }),
+    },
+  ),
 );
 
 const authActions: AuthActions = {
@@ -32,12 +37,12 @@ const authActions: AuthActions = {
     const response = await authApi.signIn(request);
     useAuthStore.setState({ ...response });
   },
-  signOut: () => useAuthStore.setState({ token: undefined, user: undefined }),
+  signOut: () => useAuthStore.setState({ ...initialState }),
   signUp: async (request) => {
     const response = await authApi.signUp(request);
     useAuthStore.setState({ ...response });
   },
-  updateCurrentUser: async () => {
+  loadCurrentUser: async () => {
     const user = await authApi.getCurrentUser();
     useAuthStore.setState({ user });
   },

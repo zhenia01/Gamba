@@ -1,6 +1,8 @@
-﻿namespace Gamba.Infrastructure.CommandsQueriesProcessing.Queries;
+﻿using MediatR;
 
-public interface IQueryHandler<in TQuery, TQueryResult> where TQuery: IQuery<TQueryResult>
+namespace Gamba.Application.Configuration.Queries;
+
+public interface IQueryHandler<in TQuery, TQueryResult>: IRequestHandler<TQuery, TQueryResult> 
+    where TQuery: IRequest<TQueryResult>
 {
-    Task<TQueryResult> Handle(TQuery query, CancellationToken cancellation = default);
 }

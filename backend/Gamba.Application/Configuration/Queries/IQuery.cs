@@ -1,3 +1,5 @@
-﻿namespace Gamba.Infrastructure.CommandsQueriesProcessing.Queries;
+﻿using MediatR;
 
-public interface IQuery<out TResult>{}
+namespace Gamba.Application.Configuration.Queries;
+
+public interface IQuery<out TResult>: IRequest<TResult> {}
