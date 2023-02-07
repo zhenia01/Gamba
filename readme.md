@@ -22,5 +22,5 @@
 ## Start
 1. Fill ENVs
 2. **`npx simple-git-hooks ../simple-git-hooks.js`** in the **`/frontend`** folder
-3. **`cd frontend && npm run start`** 
+3. **`cd frontend && npm run dev`** 
 4. **`cd backend && dotnet build && cd Gamba.WebAPI && dotnet run`**
