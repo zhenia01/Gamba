@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-
+import { Button } from '@/components/button/Button';
+import { Link } from '@/components/link/link';
 import { authActions, useCurrentUser } from '@/features/auth';
 
 function Home() {
@@ -8,16 +8,13 @@ function Home() {
   return (
     <div>
       <p>Hello, {user?.name ?? 'anonymous'}</p>
+      <div>{!user && <Link href="/sign-in">Sign In</Link>}</div>
+      <div>{!user && <Link href="/sign-up">Sign Up</Link>}</div>
       <div>
-        {!user && <Link to="/sign-in">Sign In</Link>}
+        {user && <Button onClick={authActions.signOut} label="Sign out"></Button>}
       </div>
-      <div>
-        {!user && <Link to="/sign-up">Sign Up</Link>}
-      </div>
-      <div>
-        {user && <button onClick={authActions.signOut}>Sign out</button>}
-      </div>
-    </div>);
+    </div>
+  );
 }
 
 export { Home };

@@ -1,9 +1,11 @@
 import './index.css';
 
+import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { Link } from '@/components/link/link';
 import * as auth from '@/features/auth';
 import { Home } from '@/pages/Home';
 import { Root } from '@/pages/Root';
@@ -11,32 +13,41 @@ import { Root } from '@/pages/Root';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root/>,
-    errorElement:
+    element: <Root />,
+    errorElement: (
       <div>
         Error occurred!
-        <Link to="/home">Go Home</Link>
-      </div>,
+        <Link href="/home">Go Home</Link>
+      </div>
+    ),
     children: [
-      { index: true, element: <p><Link to="/home">Go Home</Link></p> },
-      { path: '/home', element: <Home/> },
+      {
+        index: true,
+        element: (
+          <p>
+            <Link href="/home">Go Home</Link>
+          </p>
+        ),
+      },
+      { path: '/home', element: <Home /> },
       {
         path: '/sign-up',
-        element: <auth.SignUp/>,
+        element: <auth.SignUp />,
         action: auth.signUpAction,
       },
       {
         path: '/sign-in',
-        element: <auth.SignIn/>,
+        element: <auth.SignIn />,
         action: auth.signInAction,
       },
     ],
   },
-
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+     <ChakraProvider>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>,
 );
