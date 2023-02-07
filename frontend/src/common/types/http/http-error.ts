@@ -1,11 +1,11 @@
 import { HttpStatusCode } from '@/common/enums';
 
 type ProblemDetails = {
-  status: HttpStatusCode
-  title: string
-  detail?: string
-  type?: string
-  instance?: string
+  status: HttpStatusCode;
+  title: string;
+  detail?: string;
+  type?: string;
+  instance?: string;
 } & Record<string, unknown>;
 
 type Constructor = {
@@ -16,11 +16,13 @@ type Constructor = {
 class HttpError extends Error {
   public details: ProblemDetails;
 
-  public constructor({
-     details,
-     message,
-   }: Constructor) {
-    super(message ?? `${details.status}: ${details.title}\n Details: ${details.detail ?? 'none'}`);
+  public constructor({ details, message }: Constructor) {
+    super(
+      message ??
+        `${details.status}: ${details.title}\n Details: ${
+          details.detail ?? 'none'
+        }`,
+    );
     this.details = details;
   }
 }
