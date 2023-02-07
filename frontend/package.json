@@ -32,8 +32,5 @@
     "extends": [
       "react-app"
     ]
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
   }
 }
