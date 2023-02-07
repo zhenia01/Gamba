@@ -1,4 +1,5 @@
 import { ContentType } from '@/common/enums';
+import { HttpError } from '@/common/types/http/http-error';
 import { getAuthToken } from '@/features/auth';
 
 type HttpOptions = {
@@ -68,11 +69,9 @@ class Http {
 
   private static async checkStatus(response: Response): Promise<Response> {
     if (!response.ok) {
-      const parsedException = await response.json().catch(() => ({
-        message: response.statusText,
-      }));
-
-      throw new Error(`${response.status} ${parsedException.message}`);
+      throw new HttpError({
+        details: await Http.parseJSON(response),
+      } );
     }
 
     return response;
