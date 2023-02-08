@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     errorElement: (
       <div>
         Error occurred!
-        <Link href="/home">Go Home</Link>
+        <Link to="/home">Go Home</Link>
       </div>
     ),
     children: [
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <p>
-            <Link href="/home">Go Home</Link>
+            <Link to="/home">Go Home</Link>
           </p>
         ),
       },

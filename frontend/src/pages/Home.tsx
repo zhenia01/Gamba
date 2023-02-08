@@ -8,8 +8,8 @@ function Home() {
   return (
     <div>
       <p>Hello, {user?.name ?? 'anonymous'}</p>
-      <div>{!user && <Link href="/sign-in">Sign In</Link>}</div>
-      <div>{!user && <Link href="/sign-up">Sign Up</Link>}</div>
+      <div>{!user && <Link to="/sign-in">Sign In</Link>}</div>
+      <div>{!user && <Link to="/sign-up">Sign Up</Link>}</div>
       <div>
         {user && <Button onClick={authActions.signOut} label="Sign out"></Button>}
       </div>
