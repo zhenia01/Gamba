@@ -32,21 +32,20 @@ const useAuthStore = create<AuthState>()(
 );
 
 const authActions = handleHttpCalls<AuthActions>({
-    signIn: async (request) => {
-      const response = await authApi.signIn(request);
-      useAuthStore.setState({ ...response });
-    },
-    signOut: () => useAuthStore.setState({ ...initialState }),
-    signUp: async (request) => {
-      const response = await authApi.signUp(request);
-      useAuthStore.setState({ ...response });
-    },
-    loadCurrentUser: async () => {
-      const user = await authApi.getCurrentUser();
-      useAuthStore.setState({ user });
-    },
+  signIn: async (request) => {
+    const response = await authApi.signIn(request);
+    useAuthStore.setState({ ...response });
   },
-);
+  signOut: () => useAuthStore.setState({ ...initialState }),
+  signUp: async (request) => {
+    const response = await authApi.signUp(request);
+    useAuthStore.setState({ ...response });
+  },
+  loadCurrentUser: async () => {
+    const user = await authApi.getCurrentUser();
+    useAuthStore.setState({ user });
+  },
+});
 
 const useCurrentUser = () => useAuthStore((store) => store.user, shallow);
 

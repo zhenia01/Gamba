@@ -1,5 +1,6 @@
 import { ActionFunction, Form, redirect } from 'react-router-dom';
 
+import { Button } from '@/components/button/Button';
 import { authActions } from '@/features/auth';
 import { getFormDataObjectFromRequest, nameOf } from '@/utils';
 
@@ -26,7 +27,7 @@ const SignIn = () => {
         Password:
         <input type="password" name={nameOf<SignInRequestDto>('password')} />
       </label>
-      <button type="submit">Sign in</button>
+      <Button type="submit" label="Sign in"></Button>
     </Form>
   );
 };

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-
+import { Button } from '@/components/button/Button';
+import { Link } from '@/components/link/Link';
 import { authActions, useCurrentUser } from '@/features/auth';
 
 function Home() {
@@ -11,7 +11,9 @@ function Home() {
       <div>{!user && <Link to="/sign-in">Sign In</Link>}</div>
       <div>{!user && <Link to="/sign-up">Sign Up</Link>}</div>
       <div>
-        {user && <button onClick={authActions.signOut}>Sign out</button>}
+        {user && (
+          <Button onClick={authActions.signOut} label="Sign out"></Button>
+        )}
       </div>
     </div>
   );

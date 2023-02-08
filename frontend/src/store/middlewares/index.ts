@@ -1,1 +1,1 @@
-export { handleHttpCalls } from './action-middlewares/handle-http-calls' ;
+export { handleHttpCalls } from './action-middlewares/handle-http-calls';

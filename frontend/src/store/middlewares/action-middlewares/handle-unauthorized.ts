@@ -5,11 +5,14 @@ import { applyProxyOnActions } from '@/store/middlewares/action-middlewares/comm
 import { StoreActions } from '@/store/middlewares/action-middlewares/common/store-actions.type';
 
 const handleUnauthorized = <T extends StoreActions>(actions: T): T =>
-    applyProxyOnActions(actions, async ([_, action]) => {
+  applyProxyOnActions(actions, async ([_, action]) => {
     try {
       await action();
     } catch (e) {
-      if (e instanceof HttpError && e.details.status === HttpStatusCode.UNAUTHORIZED) {
+      if (
+        e instanceof HttpError &&
+        e.details.status === HttpStatusCode.UNAUTHORIZED
+      ) {
         authActions.signOut();
       } else {
         throw e;
