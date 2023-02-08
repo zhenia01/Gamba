@@ -1,1 +1,1 @@
-export { handleUnauthorized } from './action-middlewares/handle-unauthorized';
+export { handleHttpCalls } from './action-middlewares/handle-http-calls' ;
