@@ -1,7 +1,7 @@
 type User = {
-  id: string,
-  name: string,
-  isCreator: boolean
+  id: string;
+  name: string;
+  isCreator: boolean;
 };
 
 export { type User };

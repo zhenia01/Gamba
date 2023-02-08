@@ -8,8 +8,8 @@ import { SignInRequestDto, SignUpRequestDto, User } from '../common/types';
 import { authApi } from '../services/auth-api.service';
 
 type AuthState = {
-  user?: User,
-  token?: string
+  user?: User;
+  token?: string;
 };
 
 const initialState: AuthState = {
@@ -18,20 +18,17 @@ const initialState: AuthState = {
 };
 
 type AuthActions = {
-  signIn: (request: SignInRequestDto) => void,
-  signUp: (request: SignUpRequestDto) => void,
-  signOut: () => void,
-  loadCurrentUser: () => void
+  signIn: (request: SignInRequestDto) => void;
+  signUp: (request: SignUpRequestDto) => void;
+  signOut: () => void;
+  loadCurrentUser: () => void;
 };
 
 const useAuthStore = create<AuthState>()(
-  persist(
-    (_) => ({ ...initialState }),
-    {
-      name: 'auth',
-      partialize: (state) => ({ token: state.token }),
-    },
-  ),
+  persist((_) => ({ ...initialState }), {
+    name: 'auth',
+    partialize: (state) => ({ token: state.token }),
+  }),
 );
 
 const authActions =
