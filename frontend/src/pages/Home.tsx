@@ -1,5 +1,5 @@
 import { Button } from '@/components/button/Button';
-import { Link } from '@/components/link/link';
+import { Link } from '@/components/link/Link';
 import { authActions, useCurrentUser } from '@/features/auth';
 
 function Home() {
