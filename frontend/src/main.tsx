@@ -11,32 +11,39 @@ import { Root } from '@/pages/Root';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root/>,
-    errorElement:
+    element: <Root />,
+    errorElement: (
       <div>
         Error occurred!
         <Link to="/home">Go Home</Link>
-      </div>,
+      </div>
+    ),
     children: [
-      { index: true, element: <p><Link to="/home">Go Home</Link></p> },
-      { path: '/home', element: <Home/> },
+      {
+        index: true,
+        element: (
+          <p>
+            <Link to="/home">Go Home</Link>
+          </p>
+        ),
+      },
+      { path: '/home', element: <Home /> },
       {
         path: '/sign-up',
-        element: <auth.SignUp/>,
+        element: <auth.SignUp />,
         action: auth.signUpAction,
       },
       {
         path: '/sign-in',
-        element: <auth.SignIn/>,
+        element: <auth.SignIn />,
         action: auth.signInAction,
       },
     ],
   },
-
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
