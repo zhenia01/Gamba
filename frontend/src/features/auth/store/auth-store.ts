@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 
-import { handleError, handleUnauthorized } from '@/store/middlewares';
+import { handleHttpCalls } from '@/store/middlewares';
 
 import { SignInRequestDto, SignUpRequestDto, User } from '../common/types';
 import { authApi } from '../services/auth-api.service';
@@ -31,26 +31,22 @@ const useAuthStore = create<AuthState>()(
   }),
 );
 
-const authActions =
-  handleError(
-    handleUnauthorized(
-      <AuthActions>
-        {
-          signIn: async (request) => {
-            const response = await authApi.signIn(request);
-            useAuthStore.setState({ ...response });
-          },
-          signOut: () => useAuthStore.setState({ ...initialState }),
-          signUp: async (request) => {
-            const response = await authApi.signUp(request);
-            useAuthStore.setState({ ...response });
-          },
-          loadCurrentUser: async () => {
-            const user = await authApi.getCurrentUser();
-            useAuthStore.setState({ user });
-          },
-        }),
-  );
+const authActions = handleHttpCalls<AuthActions>({
+    signIn: async (request) => {
+      const response = await authApi.signIn(request);
+      useAuthStore.setState({ ...response });
+    },
+    signOut: () => useAuthStore.setState({ ...initialState }),
+    signUp: async (request) => {
+      const response = await authApi.signUp(request);
+      useAuthStore.setState({ ...response });
+    },
+    loadCurrentUser: async () => {
+      const user = await authApi.getCurrentUser();
+      useAuthStore.setState({ user });
+    },
+  },
+);
 
 const useCurrentUser = () => useAuthStore((store) => store.user, shallow);
 
