@@ -1,5 +1,4 @@
 import { Button as ChakraUIButton } from '@chakra-ui/react';
-import { FC } from 'react';
 
 type Props = {
   label: string;
@@ -8,12 +7,12 @@ type Props = {
   onClick?: () => void;
 };
 
-const Button: FC<Props> = ({
+const Button = ({
   variant = 'solid',
   label,
   type = 'button',
   onClick,
-}) => {
+}: Props) => {
   return (
     <ChakraUIButton
       colorScheme="teal"

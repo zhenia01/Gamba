@@ -3,12 +3,12 @@ import { HttpError } from '@/common/types/http/http-error';
 import { getAuthToken } from '@/features/auth';
 
 type HttpOptions = {
-  contentType: ContentType,
-  method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-  payload?: BodyInit | object,
-  hasAuth: boolean,
-  queryParams: Record<string, unknown>,
-  headers?: Record<string, string>
+  contentType: ContentType;
+  method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
+  payload?: BodyInit | object;
+  hasAuth: boolean;
+  queryParams: Record<string, unknown>;
+  headers?: Record<string, string>;
 };
 
 class Http {
@@ -24,7 +24,10 @@ class Http {
       queryParams,
     } = options;
 
-    const body = (typeof payload === 'object' && payload) ? JSON.stringify(payload) : payload;
+    const body =
+      typeof payload === 'object' && payload
+        ? JSON.stringify(payload)
+        : payload;
 
     const headers = this.getHeaders(contentType, hasAuth);
 
@@ -38,7 +41,10 @@ class Http {
       .catch(this.throwError);
   }
 
-  private static getHeaders(contentType?: ContentType, hasAuth?: boolean): Headers {
+  private static getHeaders(
+    contentType?: ContentType,
+    hasAuth?: boolean,
+  ): Headers {
     const headers = new Headers();
 
     if (contentType) {
@@ -71,7 +77,7 @@ class Http {
     if (!response.ok) {
       throw new HttpError({
         details: await Http.parseJSON(response),
-      } );
+      });
     }
 
     return response;

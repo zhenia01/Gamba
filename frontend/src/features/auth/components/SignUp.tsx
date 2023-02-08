@@ -8,24 +8,28 @@ import { SignUpRequestDto } from '../common/types';
 
 const action: ActionFunction = async ({ request }) => {
   const { signUp } = authActions;
-  const signUpDto = await getFormDataObjectFromRequest<SignUpRequestDto>(request);
+  const signUpDto = await getFormDataObjectFromRequest<SignUpRequestDto>(
+    request,
+  );
   await signUp(signUpDto);
 
   return redirect('/home');
 };
 
 const SignUp = () => {
-  return <Form method="post">
-    <label style={{ display: 'block' }}>
-      Name:
-      <input type="text" name={nameOf<SignUpRequestDto>('name')}/>
-    </label>
-    <label style={{ display: 'block' }}>
-      Password:
-      <input type="password" name={nameOf<SignUpRequestDto>('password')}/>
-    </label>
-    <Button type="submit" label="Sign up"></Button>
-  </Form>;
+  return (
+    <Form method="post">
+      <label style={{ display: 'block' }}>
+        Name:
+        <input type="text" name={nameOf<SignUpRequestDto>('name')} />
+      </label>
+      <label style={{ display: 'block' }}>
+        Password:
+        <input type="password" name={nameOf<SignUpRequestDto>('password')} />
+      </label>
+      <Button type="submit" label="Sign up"></Button>
+    </Form>
+  );
 };
 
 export { action, SignUp };

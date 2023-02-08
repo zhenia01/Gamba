@@ -16,9 +16,7 @@ function Root() {
     }
   }, []);
 
-  return (
-    <Outlet/>
-  );
+  return <Outlet />;
 }
 
 export { Root };
