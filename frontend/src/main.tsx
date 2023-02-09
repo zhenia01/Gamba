@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
