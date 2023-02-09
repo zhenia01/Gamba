@@ -4,7 +4,7 @@
 
   _To work properly, fill in the **`Gamba.WebAPI/appsettings.Development.json`** file. Use the **`appsettings.json`** file as an example._
 
-- [Frontend](./frontend) — Gamba's backend. Written in React
+- [Frontend](./frontend) — Gamba's frontend. Written in React
 
   _To work properly, fill in the **`.env`** file. Use the **`.env.example`** file as an example._
 
