@@ -3,45 +3,31 @@ import './index.scss';
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouteObject,
+  RouterProvider,
+} from 'react-router-dom';
 
-import { Link } from '@/components/link/Link';
-import * as auth from '@/features/auth';
-import { Home } from '@/pages/Home';
-import { Root } from '@/pages/Root';
+import { signInRoute, signUpRoute } from '@/features/auth';
+import {
+  dashboardRoute,
+  homeRoute,
+  rootIndexRoute,
+  rootRoute,
+} from '@/routing/routes';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Root />,
-    errorElement: (
-      <div>
-        Error occurred!
-        <Link to="/home">Go Home</Link>
-      </div>
-    ),
+    ...rootRoute,
     children: [
-      {
-        index: true,
-        element: (
-          <p>
-            <Link to="/home">Go Home</Link>
-          </p>
-        ),
-      },
-      { path: '/home', element: <Home /> },
-      {
-        path: '/sign-up',
-        element: <auth.SignUp />,
-        action: auth.signUpAction,
-      },
-      {
-        path: '/sign-in',
-        element: <auth.SignIn />,
-        action: auth.signInAction,
-      },
+      rootIndexRoute,
+      homeRoute,
+      signInRoute,
+      signUpRoute,
+      dashboardRoute,
     ],
-  },
+  } as RouteObject,
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
