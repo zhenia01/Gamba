@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier ."
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.9",

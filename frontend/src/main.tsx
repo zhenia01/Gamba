@@ -5,8 +5,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { signInRoute, signUpRoute } from '@/features/auth';
 import {
+  authRoute,
   dashboardRoute,
   homeRoute,
   rootIndexRoute,
@@ -16,13 +16,7 @@ import {
 const router = createBrowserRouter([
   {
     ...rootRoute,
-    children: [
-      rootIndexRoute,
-      homeRoute,
-      signInRoute,
-      signUpRoute,
-      dashboardRoute,
-    ],
+    children: [rootIndexRoute, authRoute, homeRoute, dashboardRoute],
   },
 ]);
 

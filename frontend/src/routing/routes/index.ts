@@ -1,3 +1,4 @@
+export { authRoute } from '../../features/auth/routes/auth.route';
 export { dashboardRoute } from './dashboard/dashboard.route';
 export { homeRoute } from './home/home.route';
 export { rootRoute } from './root/root.route';
