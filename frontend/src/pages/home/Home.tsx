@@ -1,5 +1,5 @@
-import { Button } from '@/components/button/Button';
-import { Link } from '@/components/link/Link';
+import { AppRoute } from '@/common/enums';
+import { Button, Link } from '@/components/common';
 import { authActions, useCurrentUser } from '@/features/auth';
 
 function Home() {
@@ -8,12 +8,15 @@ function Home() {
   return (
     <div>
       <p>Hello, {user?.name ?? 'anonymous'}</p>
-      <div>{!user && <Link to="/sign-in">Sign In</Link>}</div>
-      <div>{!user && <Link to="/sign-up">Sign Up</Link>}</div>
+      <div>{!user && <Link to={AppRoute.SIGN_IN}>Sign In</Link>}</div>
+      <div>{!user && <Link to={AppRoute.SIGN_UP}>Sign Up</Link>}</div>
       <div>
         {user && (
           <Button onClick={authActions.signOut} label="Sign out"></Button>
         )}
+      </div>
+      <div>
+        <Link to={AppRoute.DASHBOARD}>Go to protected dashboard</Link>
       </div>
     </div>
   );

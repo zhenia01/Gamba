@@ -1,6 +1,7 @@
 import { ActionFunction, Form, redirect } from 'react-router-dom';
 
-import { Button } from '@/components/button/Button';
+import { AppRoute } from '@/common/enums';
+import { Button } from '@/components/common';
 import { authActions } from '@/features/auth';
 import { getFormDataObjectFromRequest, nameOf } from '@/utils';
 
@@ -13,7 +14,7 @@ const action: ActionFunction = async ({ request }) => {
   );
   await signIn(signInDto);
 
-  return redirect('/home');
+  return redirect(AppRoute.HOME);
 };
 
 const SignIn = () => {

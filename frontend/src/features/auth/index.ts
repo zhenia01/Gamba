@@ -1,4 +1,4 @@
 export { type User } from './common/types/user';
-export { SignIn, action as signInAction } from './components/SignIn';
-export { SignUp, action as signUpAction } from './components/SignUp';
+export { signInRoute } from './routes/sign-in.route';
+export { signUpRoute } from './routes/sign-up.route';
 export { authActions, getAuthToken, useCurrentUser } from './store/auth-store';
