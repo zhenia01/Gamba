@@ -1,10 +1,10 @@
 import React from 'react';
-import { RouteObject } from 'react-router-dom';
+import { NonIndexRouteObject } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
 import { Home } from '@/pages';
 
-const homeRoute: RouteObject = {
+const homeRoute: NonIndexRouteObject = {
   path: AppRoute.HOME,
   element: <Home />,
 };

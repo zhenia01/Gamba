@@ -3,11 +3,7 @@ import './index.scss';
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouteObject,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { signInRoute, signUpRoute } from '@/features/auth';
 import {
@@ -27,7 +23,7 @@ const router = createBrowserRouter([
       signUpRoute,
       dashboardRoute,
     ],
-  } as RouteObject,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

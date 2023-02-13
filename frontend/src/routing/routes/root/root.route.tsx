@@ -1,10 +1,10 @@
-import { RouteObject } from 'react-router-dom';
+import { NonIndexRouteObject } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
 import { Link } from '@/components/common';
 import { Root } from '@/pages';
 
-const rootRoute: RouteObject = {
+const rootRoute: NonIndexRouteObject = {
   path: AppRoute.ROOT,
   element: <Root />,
   errorElement: (
