@@ -1,0 +1,5 @@
+.chakra-tabs {
+  &__tablist &__tab:focus-visible {
+    box-shadow: none;
+  }
+}
