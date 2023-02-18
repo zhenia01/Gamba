@@ -1,15 +1,11 @@
 import { ChakraProvider } from '@chakra-ui/react';
 
-import { DarkModeProvider } from './DarkModeProvider';
+import { theme } from '@/theme';
 
 type Props = {
   children: React.ReactNode;
 };
 
 export function AppProvider({ children }: Props) {
-  return (
-    <ChakraProvider>
-      <DarkModeProvider>{children}</DarkModeProvider>
-    </ChakraProvider>
-  );
+  return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
 }
