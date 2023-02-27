@@ -25,7 +25,7 @@ namespace Gamba.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Gamba.DataAccess.Users.User", b =>
+            modelBuilder.Entity("Gamba.Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -47,7 +47,7 @@ namespace Gamba.Infrastructure.Migrations
                     b.ToTable("Users", "users");
                 });
 
-            modelBuilder.Entity("Gamba.DataAccess.Users.UserCreator", b =>
+            modelBuilder.Entity("Gamba.Domain.Users.UserCreator", b =>
                 {
                     b.Property<Guid>("CreatorId")
                         .HasColumnType("uuid");
@@ -66,15 +66,15 @@ namespace Gamba.Infrastructure.Migrations
                     b.ToTable("UserCreators", "users");
                 });
 
-            modelBuilder.Entity("Gamba.DataAccess.Users.UserCreator", b =>
+            modelBuilder.Entity("Gamba.Domain.Users.UserCreator", b =>
                 {
-                    b.HasOne("Gamba.DataAccess.Users.User", "Creator")
+                    b.HasOne("Gamba.Domain.Users.User", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gamba.DataAccess.Users.User", null)
+                    b.HasOne("Gamba.Domain.Users.User", null)
                         .WithMany("_followingCreators")
                         .HasForeignKey("_followerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -83,7 +83,7 @@ namespace Gamba.Infrastructure.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("Gamba.DataAccess.Users.User", b =>
+            modelBuilder.Entity("Gamba.Domain.Users.User", b =>
                 {
                     b.Navigation("_followingCreators");
                 });

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.WebAPI", "Gamba.WebAPI\Gamba.WebAPI.csproj", "{E2233782-8CAE-49F3-AC21-0A2E7575C2A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.DataAccess", "Gamba.DataAccess\Gamba.DataAccess.csproj", "{A7B3A8F9-DF67-4013-8C01-8604FE99ED08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.Domain", "Gamba.Domain\Gamba.Domain.csproj", "{A7B3A8F9-DF67-4013-8C01-8604FE99ED08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.Infrastructure", "Gamba.Infrastructure\Gamba.Infrastructure.csproj", "{204D6965-2489-40FF-B478-D345B7EB80E3}"
 EndProject
