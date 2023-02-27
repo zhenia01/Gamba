@@ -1,4 +1,5 @@
-﻿using Gamba.DataAccess.BuildingBlocks;
+﻿using Dawn;
+using Gamba.DataAccess.BuildingBlocks;
 using Gamba.DataAccess.Users.Rules;
 
 namespace Gamba.DataAccess.Users;
@@ -22,7 +23,7 @@ public class User : Entity, IAggregateRoot
     private User(string name, string password)
     {
         Id = new (Guid.NewGuid());
-        Name = name;
+        Name = Guard.Argument(name).NotNull().MinLength(5).MaxLength(20);
         _password = password;
         _followingCreators = new();
     }

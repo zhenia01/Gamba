@@ -35,13 +35,11 @@ public class AuthModule: IFeatureModule
         return endpoints;
     }
 
-    private record AuthRequest(string Name, string Password);
     private record AuthResponse(UserDto User, string Token);
 
-    private static async Task<Created<AuthResponse>> SignUp(AuthRequest authRequest, IMediator dispatcher)
+    private static async Task<Created<AuthResponse>> SignUp([Validate]RegisterUserCommand requestBody, IMediator dispatcher)
     {
-        var (name, password) = authRequest;
-        var (user, token) = await dispatcher.Send(new RegisterUserCommand(name, password));
+        var (user, token) = await dispatcher.Send(requestBody);
         return TypedResults.Created($"/users/{user.Id}", new AuthResponse(user, token));
     }
 
@@ -52,10 +50,9 @@ public class AuthModule: IFeatureModule
         return TypedResults.Ok(user);
     }
     
-    private static async Task<Ok<AuthResponse>> SignIn(AuthRequest authRequest, IMediator dispatcher)
+    private static async Task<Ok<AuthResponse>> SignIn([Validate]GetUserByCredentialsQuery requestBody, IMediator dispatcher)
     {
-        var (name, password) = authRequest;
-        var (user, token) = await dispatcher.Send(new GetUserByCredentialsQuery(name, password));
+        var (user, token) = await dispatcher.Send(requestBody);
         return TypedResults.Ok(new AuthResponse(user, token));
     }
 }

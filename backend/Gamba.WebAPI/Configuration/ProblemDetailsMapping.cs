@@ -13,8 +13,8 @@ public static class ProblemDetailsMapping
     {
         services.AddProblemDetails(opt =>
         {
-            opt.MapToStatusCode<AuthenticationException>((int)HttpStatusCode.Unauthorized);
-            opt.MapToStatusCode<EntityNotFoundException>((int)HttpStatusCode.NotFound);
+            opt.MapToStatusCode<AuthenticationException>(StatusCodes.Status401Unauthorized);
+            opt.MapToStatusCode<EntityNotFoundException>(StatusCodes.Status404NotFound);
             opt.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
         });
         
