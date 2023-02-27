@@ -3,7 +3,7 @@ import { Box, Card, CardBody } from '@chakra-ui/react';
 import { AppRoute } from '@/common/enums';
 import { NavTabData, NavTabs } from '@/components/common';
 
-import { AuthTabIndex } from '../enums/auth-tab-index';
+import { AuthTabIndex } from '../common/enums/auth-tab-index';
 
 const authTabData: NavTabData[] = [
   {

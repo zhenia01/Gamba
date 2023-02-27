@@ -10,6 +10,7 @@ const handleError = <T extends StoreActions>(actions: T): T =>
         // eslint-disable-next-line no-console
         console.error(`Error in action [${name}]: ${e.message}`); // TODO: replace with toastr
       }
+      throw e;
     }
   });
 
