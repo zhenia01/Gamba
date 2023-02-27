@@ -2,13 +2,13 @@
 
 namespace Gamba.DataAccess.Users.Rules;
 
-public class UserIsCreatorRule : IBusinessRule
+public class UserMustBeCreatorRule : IBusinessRule
 {
-    public UserIsCreatorRule(bool isCreator)
+    public UserMustBeCreatorRule(bool isCreator)
     {
         IsBroken = !isCreator;
     }
     
     public bool IsBroken { get; }
-    public string Message => "User is not a creator.";
+    public string Message => "User is not a creator";
 }

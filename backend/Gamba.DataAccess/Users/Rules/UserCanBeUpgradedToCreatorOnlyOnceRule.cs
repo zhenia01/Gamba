@@ -10,5 +10,5 @@ public class UserCanBeUpgradedToCreatorOnlyOnceRule : IBusinessRule
     }
 
     public bool IsBroken { get; }
-    public string Message { get; } = "User can be upgraded to Creator only once.";
+    public string Message { get; } = "User can be upgraded to Creator only once";
 }

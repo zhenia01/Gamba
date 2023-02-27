@@ -36,7 +36,7 @@ builder.WebHost.UseUrls("http://*:5050");
 
 var app = builder.Build();
 
-app.UseDatabaseMigrate();
+app.MigrateDatabase();
 
 app.UseCors();
 
