@@ -9,6 +9,7 @@ namespace Gamba.WebAPI.SeedWork
             Title = "Business rule validation error";
             Status = StatusCodes.Status409Conflict;
             Detail = exception.Details;
+            Extensions["error"] = exception.BrokenRule.GetType().Name[..^4];
         }
     }
 }
