@@ -1,5 +1,6 @@
-﻿using BCrypt.Net;
+﻿using System.Security.Authentication;
 using Gamba.Application.Configuration.Queries;
+using Gamba.Application.Exceptions;
 using Gamba.Application.Users.Common;
 using Gamba.Infrastructure.Domain.Users;
 using Gamba.Infrastructure.Services;
@@ -23,10 +24,11 @@ public class GetUserByCredentialsQueryHandler : IQueryHandler<GetUserByCredentia
     {
         var (name, password) = query;
 
-        var user = await _userRepository.GetByName(name);
+        var user = await _userRepository.GetByName(name) ?? throw new EntityNotFoundException($"User {name} does not exist");
+        
         if (!user.VerifyPassword(hashedPassword => PasswordService.CheckPassword(password, hashedPassword)))
         {
-            throw new BcryptAuthenticationException("Wrong password provided");
+            throw new AuthenticationException("Wrong password provided");
         }
         
         string token = _jwtTokenService.GenerateToken(user.Id, user.Name);

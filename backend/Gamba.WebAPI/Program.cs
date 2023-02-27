@@ -1,8 +1,6 @@
 using Gamba.Application.Users.RegisterUser;
-using Gamba.DataAccess.BuildingBlocks;
 using Gamba.Infrastructure.Database;
 using Gamba.WebAPI.Configuration;
-using Gamba.WebAPI.SeedWork;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +21,7 @@ builder.Services.AddDbContext<GambaContext>(
         options.MigrationsAssembly(typeof(GambaContext).Assembly.GetName().Name);
     }));
 
-builder.Services.AddProblemDetails(opt =>
-{
-    opt.IncludeExceptionDetails = (_, _) => builder.Environment.IsDevelopment();
-    
-    opt.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
-});
+builder.Services.MapProblemDetails();
 
 builder.Services.AddControllers();
 
