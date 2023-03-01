@@ -29,6 +29,13 @@ body {
   width: 100wh;
 }
 
-.chakra-form-control:not(:has(> .chakra-form__error-message)) {
-  margin-bottom: 27px;
+.chakra-form-control {
+  &:has(> .chakra-form__error-message:empty),
+  &:not(:has(> .chakra-form__error-message)) {
+    margin-bottom: 27px;
+  }
+
+  .chakra-form__error-message:empty {
+    display: none;
+  }
 }
