@@ -43,7 +43,7 @@ const action: ActionFunction = async ({ request }) => {
   }
 };
 
-const enum NameErrors {
+const enum NameError {
   Unique = 'unique',
 }
 
@@ -56,25 +56,28 @@ const SignUp = () => {
     clearErrors,
     formState: {
       isValid,
-      errors: { name: nameErrors },
+      errors: { name: nameErrors, password: passwordErrors },
     },
-  } = useForm<SignUpRequestDto>();
+  } = useForm<SignUpRequestDto>({ mode: 'all' });
 
   useEffect(() => {
     if (actionData?.error === 'UserNameMustBeUnique') {
       setError(
         'name',
-        { type: NameErrors.Unique, message: actionData.detail },
+        { type: NameError.Unique, message: actionData.detail },
         { shouldFocus: true },
       );
     }
   }, [actionData]);
 
-  const isNameTaken = nameErrors?.type === NameErrors.Unique;
+  const isNameTaken = nameErrors?.type === NameError.Unique;
 
   return (
     <Form method="post">
-      <FormControl isRequired isInvalid={!!nameErrors}>
+      <FormControl
+        isRequired={nameValidation.required}
+        isInvalid={!!nameErrors}
+      >
         <FormLabel>Name</FormLabel>
         <Input
           type="text"
@@ -87,9 +90,14 @@ const SignUp = () => {
             },
           })}
         />
-        <FormErrorMessage>{nameErrors?.message?.toString()}</FormErrorMessage>
+        {nameErrors?.type === NameError.Unique && (
+          <FormErrorMessage>{nameErrors.message}</FormErrorMessage>
+        )}
       </FormControl>
-      <FormControl isRequired>
+      <FormControl
+        isRequired={passwordValidation.required}
+        isInvalid={!!passwordErrors}
+      >
         <FormLabel>Password</FormLabel>
         <PasswordInput
           {...passwordValidation}

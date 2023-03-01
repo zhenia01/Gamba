@@ -4,6 +4,7 @@ using Gamba.WebAPI.Configuration;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddJwtAuth(builder.Configuration);
 builder.Services.AddSwagger();
 
 builder.Services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserCommand.Validator>(ServiceLifetime.Singleton);
+ValidatorOptions.Global.LanguageManager.Enabled = false;
 
 builder.Services.AddFeatureModules();
 
@@ -52,6 +55,8 @@ app.UseAuth();
 
 app.UseHttpsRedirection();
 
-app.MapFeatureModulesEndpoints();
+var root = app.MapGroup("");
+root.AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory);
+root.MapFeatureModulesEndpoints();
 
 app.Run();
