@@ -89,9 +89,7 @@ const SignUp = () => {
             },
           })}
         />
-        {nameErrors && (
-          <FormErrorMessage>{nameErrors.message}</FormErrorMessage>
-        )}
+        <FormErrorMessage>{nameErrors?.message}</FormErrorMessage>
       </FormControl>
       <FormControl
         isRequired={!!passwordValidation.required}
@@ -103,6 +101,7 @@ const SignUp = () => {
             ...passwordValidation,
           })}
         />
+        <FormErrorMessage>{passwordErrors?.message}</FormErrorMessage>
       </FormControl>
       <Button
         type="submit"

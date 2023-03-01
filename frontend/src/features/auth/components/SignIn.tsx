@@ -63,17 +63,15 @@ const SignIn = () => {
 
   useEffect(() => {
     if (actionData?.status === HttpStatusCode.NOT_FOUND) {
-      setError(
-        'name',
-        { type: UserErrors.WrongUsername, message: actionData.detail },
-        { shouldFocus: true },
-      );
+      setError('name', {
+        type: UserErrors.WrongUsername,
+        message: actionData.detail,
+      });
     } else if (actionData?.status === HttpStatusCode.UNAUTHORIZED) {
-      setError(
-        'password',
-        { type: UserErrors.WrongPassword, message: actionData.detail },
-        { shouldFocus: true },
-      );
+      setError('password', {
+        type: UserErrors.WrongPassword,
+        message: actionData.detail,
+      });
     }
   }, [actionData]);
 
@@ -89,9 +87,7 @@ const SignIn = () => {
           placeholder="Name"
           {...register('name', nameValidation)}
         />
-        {nameErrors && (
-          <FormErrorMessage>{nameErrors.message}</FormErrorMessage>
-        )}
+        <FormErrorMessage>{nameErrors?.message}</FormErrorMessage>
       </FormControl>
       <FormControl
         isRequired={!!passwordValidation.required}
@@ -103,9 +99,7 @@ const SignIn = () => {
             ...passwordValidation,
           })}
         />
-        {passwordErrors && (
-          <FormErrorMessage>{passwordErrors.message}</FormErrorMessage>
-        )}
+        <FormErrorMessage>{passwordErrors?.message}</FormErrorMessage>
       </FormControl>
       <Button
         type="submit"
