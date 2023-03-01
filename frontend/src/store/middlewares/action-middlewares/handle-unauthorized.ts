@@ -14,9 +14,8 @@ const handleUnauthorized = <T extends StoreActions>(actions: T): T =>
         e.details.status === HttpStatusCode.UNAUTHORIZED
       ) {
         authActions.signOut();
-      } else {
-        throw e;
       }
+      throw e;
     }
   });
 

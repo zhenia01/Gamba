@@ -4,13 +4,15 @@ import {
   withDefaultColorScheme,
 } from '@chakra-ui/react';
 
+import { components } from './components';
+
 const config: ThemeConfig = {
   initialColorMode: 'dark',
   useSystemColorMode: false,
 };
 
 const theme = extendTheme(
-  { config },
+  { config, components },
   withDefaultColorScheme({ colorScheme: 'teal' }),
 );
 export { theme };

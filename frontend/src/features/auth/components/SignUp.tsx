@@ -4,9 +4,6 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  InputGroup,
-  InputRightElement,
-  useBoolean,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,6 +23,9 @@ import { authActions } from '@/features/auth';
 import { getFormDataObjectFromRequest } from '@/utils';
 
 import { SignUpRequestDto } from '../common/types';
+import { nameValidation } from '../common/validations/name.validation';
+import { passwordValidation } from '../common/validations/password.validation';
+import { PasswordInput } from './PasswordInput';
 
 const action: ActionFunction = async ({ request }) => {
   try {
@@ -47,16 +47,6 @@ const enum NameError {
   Unique = 'unique',
 }
 
-const nameValidation = {
-  maxLength: 15,
-  minLength: 5,
-  required: true,
-};
-const passwordValidation = {
-  minLength: 5,
-  required: true,
-};
-
 const SignUp = () => {
   const { state: navigationState } = useNavigation();
   const actionData = useActionData() as ProblemDetails;
@@ -69,7 +59,6 @@ const SignUp = () => {
       errors: { name: nameErrors, password: passwordErrors },
     },
   } = useForm<SignUpRequestDto>({ mode: 'all' });
-  const [isPasswordHidden, { toggle: togglePasswordHidden }] = useBoolean(true);
 
   useEffect(() => {
     if (actionData?.error === 'UserNameMustBeUnique') {
@@ -101,30 +90,20 @@ const SignUp = () => {
             },
           })}
         />
-        {nameErrors?.type === NameError.Unique && (
-          <FormErrorMessage>{nameErrors.message}</FormErrorMessage>
-        )}
+        <FormErrorMessage>{nameErrors?.message}</FormErrorMessage>
       </FormControl>
       <FormControl
         isRequired={passwordValidation.required}
         isInvalid={!!passwordErrors}
       >
         <FormLabel>Password</FormLabel>
-        <InputGroup>
-          <Input
-            placeholder="Password"
-            {...passwordValidation}
-            type={isPasswordHidden ? 'password' : 'text'}
-            {...register('password', {
-              ...passwordValidation,
-            })}
-          />
-          <InputRightElement>
-            <Button variant="outline" onClick={togglePasswordHidden}>
-              {isPasswordHidden ? 'Show' : 'Hide'}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
+        <PasswordInput
+          {...passwordValidation}
+          {...register('password', {
+            ...passwordValidation,
+          })}
+        />
+        <FormErrorMessage>{passwordErrors?.message}</FormErrorMessage>
       </FormControl>
       <Button
         type="submit"
