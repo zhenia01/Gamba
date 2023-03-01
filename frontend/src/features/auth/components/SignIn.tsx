@@ -1,7 +1,7 @@
+import { Button } from '@chakra-ui/react';
 import { ActionFunction, Form, redirect } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
-import { Button } from '@/components/common';
 import { authActions } from '@/features/auth';
 import { getFormDataObjectFromRequest, nameOf } from '@/utils';
 
@@ -28,7 +28,7 @@ const SignIn = () => {
         Password:
         <input type="password" name={nameOf<SignInRequestDto>('password')} />
       </label>
-      <Button type="submit" label="Sign in"></Button>
+      <Button type="submit">Sign in</Button>
     </Form>
   );
 };

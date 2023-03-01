@@ -22,7 +22,7 @@ public class UserCreator : Entity
 
     internal static UserCreator AddFollower(User follower, User creator)
     {
-        CheckRule(new UserIsCreatorRule(creator.IsCreator));
+        CheckRule(new UserMustBeCreatorRule(creator.IsCreator));
         CheckRule(new CreatorCantFollowHimselfRule(follower.Id, creator.Id));
 
         return new UserCreator(follower.Id, creator);

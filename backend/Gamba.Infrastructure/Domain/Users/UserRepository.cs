@@ -19,18 +19,18 @@ namespace Gamba.Infrastructure.Domain.Users
             await _context.Users.AddAsync(user);
         }
 
-        public Task<User> GetById(UserId id)
+        public Task<User?> GetById(UserId id)
         {
             return _context.Users
                 .IncludePaths(UserEntityTypeConfiguration.FollowingCreatorsList)
-                .SingleAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
         
-        public Task<User> GetByName(string name)
+        public Task<User?> GetByName(string name)
         {
             return _context.Users
                 .IncludePaths(UserEntityTypeConfiguration.FollowingCreatorsList)
-                .SingleAsync(x => x.Name == name);
+                .SingleOrDefaultAsync(x => x.Name == name);
         }
 
         public Task SaveChanges()

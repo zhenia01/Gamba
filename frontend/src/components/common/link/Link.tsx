@@ -1,16 +1,21 @@
-import { Link as ChakraUILink } from '@chakra-ui/react';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link as ChakraLink } from '@chakra-ui/react';
+import { ThemingProps } from '@chakra-ui/system';
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from 'react-router-dom';
 
 type Props = {
   to: string;
   children: string;
-};
+} & ThemingProps<'Link'> &
+  RouterLinkProps;
 
-const Link = ({ to, children }: Props) => {
+const Link = ({ to, children, ...linkProps }: Props) => {
   return (
-    <ChakraUILink as={ReactLink} to={to}>
+    <ChakraLink as={RouterLink} to={to} {...linkProps}>
       {children}
-    </ChakraUILink>
+    </ChakraLink>
   );
 };
 

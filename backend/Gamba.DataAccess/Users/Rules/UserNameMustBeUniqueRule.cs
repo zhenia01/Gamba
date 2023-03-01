@@ -18,6 +18,6 @@ namespace Gamba.DataAccess.Users.Rules
 
         public bool IsBroken => !_userUniquenessChecker.IsUnique(_name);
 
-        public string Message => "User with this name already exists.";
+        public string Message => $"User {_name} already exists";
     }
 }

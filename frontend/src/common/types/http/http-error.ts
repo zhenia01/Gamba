@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@/common/enums';
+import { ErrorType } from '@/common/enums/errors/errors';
 
 type ProblemDetails = {
   status: HttpStatusCode;
@@ -6,6 +7,7 @@ type ProblemDetails = {
   detail?: string;
   type?: string;
   instance?: string;
+  error: ErrorType;
 } & Record<string, unknown>;
 
 type Constructor = {

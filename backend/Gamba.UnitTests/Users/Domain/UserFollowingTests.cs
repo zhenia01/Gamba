@@ -22,7 +22,7 @@ public class UserFollowingTests
         notCreator.IsCreator.Should().BeFalse();
         following
             .Should().Throw<BusinessRuleValidationException>()
-            .Where(e => e.BrokenRule is UserIsCreatorRule);
+            .Where(e => e.BrokenRule is UserMustBeCreatorRule);
     }
     
     [Fact]

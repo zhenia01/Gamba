@@ -1,11 +1,10 @@
 using Gamba.Application.Users.RegisterUser;
-using Gamba.DataAccess.BuildingBlocks;
 using Gamba.Infrastructure.Database;
 using Gamba.WebAPI.Configuration;
-using Gamba.WebAPI.SeedWork;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +13,8 @@ builder.Services.AddJwtAuth(builder.Configuration);
 builder.Services.AddSwagger();
 
 builder.Services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserCommand.Validator>(ServiceLifetime.Singleton);
+ValidatorOptions.Global.LanguageManager.Enabled = false;
 
 builder.Services.AddFeatureModules();
 
@@ -23,12 +24,7 @@ builder.Services.AddDbContext<GambaContext>(
         options.MigrationsAssembly(typeof(GambaContext).Assembly.GetName().Name);
     }));
 
-builder.Services.AddProblemDetails(opt =>
-{
-    opt.IncludeExceptionDetails = (_, _) => builder.Environment.IsDevelopment();
-    
-    opt.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
-});
+builder.Services.MapProblemDetails();
 
 builder.Services.AddControllers();
 
@@ -43,7 +39,7 @@ builder.WebHost.UseUrls("http://*:5050");
 
 var app = builder.Build();
 
-app.UseDatabaseMigrate();
+app.MigrateDatabase();
 
 app.UseCors();
 
@@ -59,6 +55,8 @@ app.UseAuth();
 
 app.UseHttpsRedirection();
 
-app.MapFeatureModulesEndpoints();
+var root = app.MapGroup("");
+root.AddEndpointFilterFactory(ValidationFilter.ValidationFilterFactory);
+root.MapFeatureModulesEndpoints();
 
 app.Run();

@@ -8,6 +8,7 @@ const enum HttpStatusCode {
   NO_CONTENT = 204,
   FORBIDDEN = 403,
   CONFLICT = 409,
+  UNPROCESSABLE_CONTENT = 422,
 }
 
 export { HttpStatusCode };

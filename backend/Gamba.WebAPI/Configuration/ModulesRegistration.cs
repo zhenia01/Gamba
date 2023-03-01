@@ -20,13 +20,13 @@ public static class ModulesRegistration
         return services;
     }
  
-    public static WebApplication MapFeatureModulesEndpoints(this WebApplication app)
+    public static RouteGroupBuilder MapFeatureModulesEndpoints(this RouteGroupBuilder routeGroupBuilder)
     {
         foreach (var module in RegisteredModules)
         {
-            module.MapEndpoints(app);
+            module.MapEndpoints(routeGroupBuilder);
         }
-        return app;
+        return routeGroupBuilder;
     }
  
     private static IEnumerable<IFeatureModule> DiscoverModules()
