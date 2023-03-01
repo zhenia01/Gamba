@@ -78,23 +78,25 @@ const SignIn = () => {
   return (
     <Form method="post">
       <FormControl
-        isRequired={!!nameValidation.required}
+        isRequired={nameValidation.required}
         isInvalid={!!nameErrors}
       >
         <FormLabel>Name</FormLabel>
         <Input
           type="text"
           placeholder="Name"
+          {...nameValidation}
           {...register('name', nameValidation)}
         />
         <FormErrorMessage>{nameErrors?.message}</FormErrorMessage>
       </FormControl>
       <FormControl
-        isRequired={!!passwordValidation.required}
+        isRequired={passwordValidation.required}
         isInvalid={!!passwordErrors}
       >
         <FormLabel>Password</FormLabel>
         <PasswordInput
+          {...passwordValidation}
           {...register('password', {
             ...passwordValidation,
           })}
