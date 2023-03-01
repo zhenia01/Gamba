@@ -1,34 +1,75 @@
-import { Button } from '@chakra-ui/react';
-import { ActionFunction, Form, redirect } from 'react-router-dom';
+import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import {
+  ActionFunction,
+  Form,
+  json,
+  redirect,
+  useNavigation,
+} from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
+import { HttpError } from '@/common/types';
 import { authActions } from '@/features/auth';
-import { getFormDataObjectFromRequest, nameOf } from '@/utils';
+import { getFormDataObjectFromRequest } from '@/utils';
 
 import { SignInRequestDto } from '../common/types';
+import { nameValidation } from '../common/validations/name.validation';
+import { passwordValidation } from '../common/validations/password.validation';
+import { PasswordInput } from './PasswordInput';
 
 const action: ActionFunction = async ({ request }) => {
-  const { signIn } = authActions;
-  const signInDto = await getFormDataObjectFromRequest<SignInRequestDto>(
-    request,
-  );
-  await signIn(signInDto);
+  try {
+    const { signIn } = authActions;
+    const signInDto = await getFormDataObjectFromRequest<SignInRequestDto>(
+      request,
+    );
+    await signIn(signInDto);
 
-  return redirect(AppRoute.HOME);
+    return redirect(AppRoute.HOME);
+  } catch (e) {
+    if (e instanceof HttpError) {
+      return json(e.details);
+    }
+    throw e;
+  }
 };
 
 const SignIn = () => {
+  const { state: navigationState } = useNavigation();
+
+  const {
+    register,
+    formState: { isValid },
+  } = useForm<SignInRequestDto>();
+
   return (
     <Form method="post">
-      <label style={{ display: 'block' }}>
-        Name:
-        <input type="text" name={nameOf<SignInRequestDto>('name')} />
-      </label>
-      <label style={{ display: 'block' }}>
-        Password:
-        <input type="password" name={nameOf<SignInRequestDto>('password')} />
-      </label>
-      <Button type="submit">Sign in</Button>
+      <FormControl isRequired>
+        <FormLabel>Name</FormLabel>
+        <Input
+          type="text"
+          placeholder="Name"
+          {...nameValidation}
+          {...register('name', nameValidation)}
+        />
+      </FormControl>
+      <FormControl isRequired>
+        <FormLabel>Password</FormLabel>
+        <PasswordInput
+          {...passwordValidation}
+          {...register('password', {
+            ...passwordValidation,
+          })}
+        />
+      </FormControl>
+      <Button
+        type="submit"
+        isLoading={navigationState == 'submitting'}
+        isDisabled={!isValid}
+      >
+        Sign in
+      </Button>
     </Form>
   );
 };
