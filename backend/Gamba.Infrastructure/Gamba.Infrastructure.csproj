@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Gamba.DataAccess\Gamba.DataAccess.csproj" />
+      <ProjectReference Include="..\Gamba.Domain\Gamba.Domain.csproj" />
     </ItemGroup>
 
 </Project>
