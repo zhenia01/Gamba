@@ -50,5 +50,6 @@ const authActions = handleHttpCalls<AuthActions>({
 const useCurrentUser = () => useAuthStore((store) => store.user, shallow);
 
 const getAuthToken = () => useAuthStore.getState().token;
+const getCurrentUser = () => useAuthStore.getState().user;
 
-export { authActions, getAuthToken, useCurrentUser };
+export { authActions, getAuthToken, getCurrentUser, useCurrentUser };
