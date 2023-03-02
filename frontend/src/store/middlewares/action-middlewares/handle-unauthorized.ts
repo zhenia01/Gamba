@@ -1,5 +1,6 @@
 import { HttpStatusCode } from '@/common/enums';
 import { HttpError } from '@/common/types/http/http-error';
+import { showUnauthorizedToast } from '@/common/utils';
 import { authActions } from '@/features/auth';
 import { applyProxyOnActions } from '@/store/middlewares/action-middlewares/common/apply-proxy';
 import { StoreActions } from '@/store/middlewares/action-middlewares/common/store-actions.type';
@@ -14,6 +15,7 @@ const handleUnauthorized = <T extends StoreActions>(actions: T): T =>
         e.details.status === HttpStatusCode.UNAUTHORIZED
       ) {
         authActions.signOut();
+        showUnauthorizedToast();
       }
       throw e;
     }
