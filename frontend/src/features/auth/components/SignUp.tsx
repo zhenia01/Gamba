@@ -53,7 +53,6 @@ const SignUp = () => {
   const {
     register,
     setError,
-    clearErrors,
     formState: {
       isValid,
       errors: { name: nameErrors, password: passwordErrors },
@@ -70,8 +69,6 @@ const SignUp = () => {
     }
   }, [actionData]);
 
-  const isNameTaken = nameErrors?.type === NameError.Unique;
-
   return (
     <Form method="post">
       <FormControl
@@ -85,9 +82,6 @@ const SignUp = () => {
           {...nameValidation}
           {...register('name', {
             ...nameValidation,
-            onChange: function () {
-              if (isNameTaken) clearErrors('name');
-            },
           })}
         />
         <FormErrorMessage>{nameErrors?.message}</FormErrorMessage>

@@ -23,7 +23,7 @@ export function NavTabs({ data }: Props) {
           </Tab>
         ))}
       </TabList>
-      <TabPanels>
+      <TabPanels pt="10px">
         <Outlet />
       </TabPanels>
     </Tabs>
