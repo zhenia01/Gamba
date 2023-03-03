@@ -1,5 +1,5 @@
 import { AppProvider } from '@/providers';
-import { AppRoutes } from '@/routing/routes';
+import { AppRoutes } from '@/routes/AppRoutes';
 
 import { Toast } from './components/common';
 
