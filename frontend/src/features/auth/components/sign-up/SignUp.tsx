@@ -7,41 +7,14 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  ActionFunction,
-  Form,
-  json,
-  redirect,
-  useActionData,
-  useNavigation,
-} from 'react-router-dom';
+import { Form, useActionData, useNavigation } from 'react-router-dom';
 
-import { AppRoute } from '@/common/enums';
-import { HttpError } from '@/common/types';
 import { ProblemDetails } from '@/common/types/http/http-error';
-import { authActions } from '@/features/auth';
-import { getFormDataObjectFromRequest } from '@/utils';
 
-import { SignUpRequestDto } from '../common/types';
-import { nameValidation } from '../common/validations/name.validation';
-import { passwordValidation } from '../common/validations/password.validation';
-import { PasswordInput } from './PasswordInput';
-
-const action: ActionFunction = async ({ request }) => {
-  try {
-    const signUpDto = await getFormDataObjectFromRequest<SignUpRequestDto>(
-      request,
-    );
-    await authActions.signUp(signUpDto);
-
-    return redirect(AppRoute.HOME);
-  } catch (e) {
-    if (e instanceof HttpError) {
-      return json(e.details);
-    }
-    throw e;
-  }
-};
+import { SignUpRequestDto } from '../../common/types';
+import { nameValidation } from '../../common/validations/name.validation';
+import { passwordValidation } from '../../common/validations/password.validation';
+import { PasswordInput } from '../common/PasswordInput';
 
 const enum NameError {
   Unique = 'unique',
@@ -116,4 +89,4 @@ const SignUp = () => {
   );
 };
 
-export { action, SignUp };
+export { SignUp };
