@@ -2,7 +2,7 @@ import { NonIndexRouteObject } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
 import { Link } from '@/components/common';
-import { Root } from '@/pages';
+import { Root } from '@/pages/Root';
 
 const rootRoute: NonIndexRouteObject = {
   path: AppRoute.ROOT,

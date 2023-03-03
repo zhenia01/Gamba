@@ -1,4 +1,4 @@
-import { AppProvider } from '@/providers';
+import { AppProvider } from '@/providers/AppProvider';
 import { AppRoutes } from '@/routes/AppRoutes';
 
 import { Toast } from './components/common';
