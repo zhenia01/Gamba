@@ -2,7 +2,7 @@ import { NonIndexRouteObject } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
 import { ProtectedRoute } from '@/components/common';
-import { Dashboard } from '@/pages';
+import { Dashboard } from '@/pages/Dashboard';
 
 const dashboardRoute: NonIndexRouteObject = {
   path: AppRoute.DASHBOARD,

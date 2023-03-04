@@ -2,7 +2,8 @@ import { RouteObject } from 'react-router-dom';
 
 import { AppRoute } from '@/common/enums';
 
-import { action, SignUp } from '../components/SignUp';
+import { action } from '../components/sign-up/action';
+import { SignUp } from '../components/sign-up/SignUp';
 
 const signUpRoute: RouteObject = {
   action,

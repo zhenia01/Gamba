@@ -7,46 +7,20 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  ActionFunction,
-  Form,
-  json,
-  redirect,
-  useActionData,
-  useNavigation,
-} from 'react-router-dom';
+import { Form, useActionData, useNavigation } from 'react-router-dom';
 
-import { AppRoute, HttpStatusCode } from '@/common/enums';
-import { HttpError } from '@/common/types';
+import { HttpStatusCode } from '@/common/enums';
 import { ProblemDetails } from '@/common/types/http/http-error';
-import { authActions } from '@/features/auth';
-import { getFormDataObjectFromRequest } from '@/utils';
 
-import { SignInRequestDto } from '../common/types';
-import { nameValidation } from '../common/validations/name.validation';
-import { passwordValidation } from '../common/validations/password.validation';
-import { PasswordInput } from './PasswordInput';
+import { SignInRequestDto } from '../../common/types';
+import { nameValidation } from '../../common/validations/name.validation';
+import { passwordValidation } from '../../common/validations/password.validation';
+import { PasswordInput } from '../common/PasswordInput';
 
 enum UserErrors {
   WrongUsername = 'wrongUsername',
   WrongPassword = 'wrongPassword',
 }
-
-const action: ActionFunction = async ({ request }) => {
-  try {
-    const signInDto = await getFormDataObjectFromRequest<SignInRequestDto>(
-      request,
-    );
-    await authActions.signIn(signInDto);
-
-    return redirect(AppRoute.HOME);
-  } catch (e) {
-    if (e instanceof HttpError) {
-      return json(e.details);
-    }
-    throw e;
-  }
-};
 
 const SignIn = () => {
   const { state: navigationState } = useNavigation();
@@ -114,4 +88,4 @@ const SignIn = () => {
   );
 };
 
-export { action, SignIn };
+export { SignIn };
