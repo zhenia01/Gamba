@@ -20,7 +20,7 @@ const authTabData: NavTabData[] = [
 
 function Auth() {
   return (
-    <Box display="flex" alignItems="center" h="100vh" justifyContent="center">
+    <Box display="flex" alignItems="center" h="100%" justifyContent="center">
       <Card align="center" justify="center" variant="elevated" w="40%" p="20px">
         <CardHeader>
           <Image src="/logo-text.svg" boxSize="70%" margin="auto" />
