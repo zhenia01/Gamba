@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_3f3fc8cd196e4914a6ff8188aa55da39 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_8afd4f2af0a448ecafa3c867d66bf45b }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_a91fb47b090a4b208280120915c855e9 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_e11aca888c9d454a9d6afedf235c7a8e }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_3f3fc8cd196e4914a6ff8188aa55da39 }}/Gamba:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_a91fb47b090a4b208280120915c855e9 }}/Gamba:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'Gamba-ez'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_51d87f8bb0de47ecb48a2fda0515667a }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_3f3fc8cd196e4914a6ff8188aa55da39 }}/Gamba:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e93cdb7287934c71b55015ba513ce5a7 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_a91fb47b090a4b208280120915c855e9 }}/Gamba:${{ github.sha }}'
