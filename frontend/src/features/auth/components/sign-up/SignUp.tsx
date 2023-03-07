@@ -30,7 +30,7 @@ const SignUp = () => {
       isValid,
       errors: { name: nameErrors, password: passwordErrors },
     },
-  } = useForm<SignUpRequestDto>();
+  } = useForm<SignUpRequestDto>({ mode: 'all' });
 
   useEffect(() => {
     if (actionData?.error === 'UserNameMustBeUnique') {
