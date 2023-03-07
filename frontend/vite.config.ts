@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
       },
       host: true,
       strictPort: true,
-      port: +env.VITE_PORT || 80,
+      port: Number(env.VITE_PORT) || 80,
     },
   };
 });
