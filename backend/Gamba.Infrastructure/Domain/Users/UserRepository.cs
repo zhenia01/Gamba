@@ -1,4 +1,4 @@
-﻿using Gamba.DataAccess.Users;
+﻿using Gamba.Domain.Users;
 using Gamba.Infrastructure.Database;
 using Gamba.Infrastructure.SeedWork;
 using Microsoft.EntityFrameworkCore;

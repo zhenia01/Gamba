@@ -5,6 +5,7 @@ using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using Gamba.WebAPI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,4 +1,4 @@
-﻿using Gamba.DataAccess.Users;
+﻿using Gamba.Domain.Users;
 using Moq;
 
 namespace Gamba.UnitTests.Users.TestHelpers;

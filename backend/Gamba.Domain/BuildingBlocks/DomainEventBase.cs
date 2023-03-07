@@ -1,4 +1,4 @@
-﻿namespace Gamba.DataAccess.BuildingBlocks;
+﻿namespace Gamba.Domain.BuildingBlocks;
 
 public class DomainEventBase : IDomainEvent
 {

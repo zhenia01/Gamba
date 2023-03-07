@@ -1,4 +1,4 @@
-﻿using Gamba.DataAccess.Users;
+﻿using Gamba.Domain.Users;
 using Gamba.Infrastructure.Database;
 
 namespace Gamba.Application.Users.DomainServices;

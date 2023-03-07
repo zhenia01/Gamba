@@ -1,6 +1,6 @@
-﻿using Gamba.DataAccess.BuildingBlocks;
+﻿using Gamba.Domain.BuildingBlocks;
 
-namespace Gamba.DataAccess.Users.Rules;
+namespace Gamba.Domain.Users.Rules;
 
 public class UserMustBeCreatorRule : IBusinessRule
 {

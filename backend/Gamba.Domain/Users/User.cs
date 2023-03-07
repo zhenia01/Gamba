@@ -1,8 +1,8 @@
 ﻿using Dawn;
-using Gamba.DataAccess.BuildingBlocks;
-using Gamba.DataAccess.Users.Rules;
+using Gamba.Domain.BuildingBlocks;
+using Gamba.Domain.Users.Rules;
 
-namespace Gamba.DataAccess.Users;
+namespace Gamba.Domain.Users;
 
 public class User : Entity, IAggregateRoot
 {

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Gamba.DataAccess.Users;
+using Gamba.Domain.Users;
 using Gamba.UnitTests.Users.TestHelpers;
 using Xunit;
 

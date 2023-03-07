@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Gamba.DataAccess.BuildingBlocks;
+namespace Gamba.Domain.BuildingBlocks;
 
 public static class MyGuard
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using Gamba.DataAccess.BuildingBlocks;
+using Gamba.Domain.BuildingBlocks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamba.Infrastructure.SeedWork

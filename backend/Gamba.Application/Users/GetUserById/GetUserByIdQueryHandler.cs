@@ -1,7 +1,7 @@
 ﻿using Gamba.Application.Configuration.Queries;
 using Gamba.Application.Exceptions;
 using Gamba.Application.Users.Common;
-using Gamba.DataAccess.Users;
+using Gamba.Domain.Users;
 using Gamba.Infrastructure.Domain.Users;
 
 namespace Gamba.Application.Users.GetUserById;

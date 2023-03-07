@@ -1,4 +1,4 @@
-﻿using Gamba.DataAccess.Users;
+﻿using Gamba.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

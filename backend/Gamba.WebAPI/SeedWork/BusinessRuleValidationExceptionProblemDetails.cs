@@ -1,4 +1,4 @@
-﻿using Gamba.DataAccess.BuildingBlocks;
+﻿using Gamba.Domain.BuildingBlocks;
 
 namespace Gamba.WebAPI.SeedWork
 {

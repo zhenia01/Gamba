@@ -5,7 +5,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
-        <RootNamespace>Gamba.DataAccess</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

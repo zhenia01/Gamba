@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Gamba.DataAccess.Users;
+using Gamba.Domain.Users;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Gamba.Infrastructure.Services;
