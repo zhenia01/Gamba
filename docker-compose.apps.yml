@@ -16,6 +16,7 @@ services:
       ClientUrl: 'http://localhost:5173'
       ConnectionStrings__Gamba: 'Host=postgres;Port=5432;Username=postgres;Password=postgrespw;Database=Gamba'
   gamba_front-end:
+    image: gamba_front-end
     depends_on:
       - gamba_back-end
     build:
@@ -24,7 +25,7 @@ services:
     container_name: 'gamba_front-end'
     restart: on-failure
     ports:
-      - "5173:80"
+      - "80:80"
     networks:
       - back
       - front
