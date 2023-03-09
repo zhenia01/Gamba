@@ -36,11 +36,9 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(p =>
         .AllowAnyMethod();
 }));
 
-builder.WebHost.UseUrls("http://*:5050");
-
 var app = builder.Build();
 
-app.MigrateDatabase();
+// app.MigrateDatabase();
 
 app.UseCors();
 
