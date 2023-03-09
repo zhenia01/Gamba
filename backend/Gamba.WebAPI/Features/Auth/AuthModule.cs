@@ -4,9 +4,10 @@ using Gamba.Application.Users.DomainServices;
 using Gamba.Application.Users.GetUserByCredentials;
 using Gamba.Application.Users.GetUserById;
 using Gamba.Application.Users.RegisterUser;
-using Gamba.DataAccess.Users;
+using Gamba.Domain.Users;
 using Gamba.Infrastructure.Domain.Users;
 using Gamba.WebAPI.Features.SeedWork;
+using Gamba.WebAPI.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 

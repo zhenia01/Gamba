@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Security.Authentication;
 using Gamba.Application.Exceptions;
-using Gamba.DataAccess.BuildingBlocks;
+using Gamba.Domain.BuildingBlocks;
 using Gamba.WebAPI.SeedWork;
 using Hellang.Middleware.ProblemDetails;
 

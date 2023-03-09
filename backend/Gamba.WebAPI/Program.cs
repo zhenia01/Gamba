@@ -5,6 +5,7 @@ using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using Gamba.WebAPI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,16 +31,14 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(p =>
 {
-    p.WithOrigins(builder.Configuration["ClientUrl"]!)
+    p.AllowAnyOrigin()
         .AllowAnyHeader()
         .AllowAnyMethod();
 }));
 
-builder.WebHost.UseUrls("http://*:5050");
-
 var app = builder.Build();
 
-app.MigrateDatabase();
+// app.MigrateDatabase();
 
 app.UseCors();
 

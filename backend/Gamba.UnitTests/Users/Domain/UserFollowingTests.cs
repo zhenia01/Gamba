@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using Gamba.DataAccess.BuildingBlocks;
-using Gamba.DataAccess.Users;
-using Gamba.DataAccess.Users.Rules;
+using Gamba.Domain.BuildingBlocks;
+using Gamba.Domain.Users;
+using Gamba.Domain.Users.Rules;
 using Gamba.UnitTests.Users.TestHelpers;
 using Xunit;
 

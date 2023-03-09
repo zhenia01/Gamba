@@ -7,7 +7,7 @@ WORKDIR /src
 COPY ["Gamba.WebAPI/Gamba.WebAPI.csproj", "Gamba.WebAPI/"]
 COPY ["Gamba.Application/Gamba.Application.csproj", "Gamba.Application/"]
 COPY ["Gamba.Infrastructure/Gamba.Infrastructure.csproj", "Gamba.Infrastructure/"]
-COPY ["Gamba.DataAccess/Gamba.DataAccess.csproj", "Gamba.DataAccess/"]
+COPY ["Gamba.Domain/Gamba.Domain.csproj", "Gamba.Domain/"]
 RUN dotnet restore "Gamba.WebAPI/Gamba.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/Gamba.WebAPI"

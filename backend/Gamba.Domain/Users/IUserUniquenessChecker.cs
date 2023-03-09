@@ -1,4 +1,4 @@
-﻿namespace Gamba.DataAccess.Users
+﻿namespace Gamba.Domain.Users
 {
     public interface IUserUniquenessChecker
     {

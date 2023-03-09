@@ -1,6 +1,6 @@
-﻿using Gamba.DataAccess.BuildingBlocks;
+﻿using Gamba.Domain.BuildingBlocks;
 
-namespace Gamba.DataAccess.Users;
+namespace Gamba.Domain.Users;
 
 public record UserId : IdValueBase
 {

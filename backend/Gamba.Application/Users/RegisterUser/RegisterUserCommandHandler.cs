@@ -1,6 +1,6 @@
 ﻿using Gamba.Application.Configuration.Commands;
 using Gamba.Application.Users.Common;
-using Gamba.DataAccess.Users;
+using Gamba.Domain.Users;
 using Gamba.Infrastructure.Domain.Users;
 using Gamba.Infrastructure.Services;
 

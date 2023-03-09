@@ -2,6 +2,8 @@
 using System.Reflection;
 using FluentValidation;
 
+namespace Gamba.WebAPI.Filters;
+
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
 public class ValidateAttribute : Attribute
 {
