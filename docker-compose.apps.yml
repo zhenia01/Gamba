@@ -25,7 +25,7 @@ services:
     container_name: 'gamba_front-end'
     restart: on-failure
     ports:
-      - "80:80"
+      - "5173:80"
     networks:
       - back
       - front
