@@ -13,7 +13,6 @@ services:
       - back
     environment:
       ASPNETCORE_ENVIRONMENT: 'Development'
-      ClientUrl: 'http://localhost:5173'
       ConnectionStrings__Gamba: 'Host=postgres;Port=5432;Username=postgres;Password=postgrespw;Database=Gamba'
   gamba_front-end:
     image: gamba_front-end
