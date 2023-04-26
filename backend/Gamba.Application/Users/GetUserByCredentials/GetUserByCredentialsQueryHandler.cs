@@ -31,8 +31,8 @@ public class GetUserByCredentialsQueryHandler : IQueryHandler<GetUserByCredentia
             throw new AuthenticationException("Wrong password provided");
         }
         
-        string token = _jwtTokenService.GenerateToken(user.Id, user.Name);
+        string token = _jwtTokenService.GenerateToken(user);
 
-        return (new(user.Id, user.Name, user.IsCreator), token);
+        return (new UserDto(user), token);
     }
 }

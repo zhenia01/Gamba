@@ -22,6 +22,6 @@ public class GetUserByIdQueryHandler: IQueryHandler<GetUserByIdQuery, UserDto>
 
         var user = await _userRepository.GetById(new UserId(id)) ?? throw new EntityNotFoundException();
 
-        return new(user.Id, user.Name, user.IsCreator);
+        return new UserDto(user);
     }
 }

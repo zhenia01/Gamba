@@ -33,8 +33,8 @@ public class RegisterUserCommandHandler: ICommandHandler<RegisterUserCommand, (U
         await _userRepository.Add(user);
         await _userRepository.SaveChanges();
 
-        string token = _jwtTokenService.GenerateToken(user.Id, user.Name);
+        string token = _jwtTokenService.GenerateToken(user);
         
-        return (new(user.Id, user.Name, user.IsCreator), token);
+        return (new UserDto(user), token);
     }
 }

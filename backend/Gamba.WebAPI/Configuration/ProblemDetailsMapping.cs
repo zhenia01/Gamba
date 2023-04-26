@@ -15,9 +15,11 @@ public static class ProblemDetailsMapping
         {
             opt.MapToStatusCode<AuthenticationException>(StatusCodes.Status401Unauthorized);
             opt.MapToStatusCode<EntityNotFoundException>(StatusCodes.Status404NotFound);
-            opt.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+            opt.Map<BusinessRuleValidationException>(e => new BusinessRuleValidationExceptionProblemDetails(e));
+            opt.Map<ArgumentException>((_, e) => e.Source == "Dawn.Guard",
+                (_, _) => StatusCodeProblemDetails.Create(StatusCodes.Status422UnprocessableEntity));
         });
-        
+
         return services;
     }
 }

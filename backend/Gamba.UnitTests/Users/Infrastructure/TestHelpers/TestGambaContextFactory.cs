@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Gamba.Infrastructure.Database;
+﻿using Gamba.Infrastructure.Database;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 

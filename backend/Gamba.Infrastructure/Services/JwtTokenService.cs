@@ -19,16 +19,21 @@ public class JwtTokenService
         _securityKey = securityKey;
     }
 
-    public string GenerateToken(UserId userId, string userName)
+    public string GenerateToken(User user)
     {
         var signingCredentials = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, userName),
-            new(JwtRegisteredClaimNames.Jti, userId.Value.ToString()),
-            new(ClaimTypes.Name, userName),
+            new(JwtRegisteredClaimNames.Sub, user.Name),
+            new(JwtRegisteredClaimNames.Jti, user.Id.Value.ToString()),
+            new(ClaimTypes.Name, user.Name),
         };
+
+        if (user.IsCreator)
+        {
+            claims.Add(new(ClaimTypes.Role, "Creator"));
+        }
 
         var token = new JwtSecurityToken(
             issuer: _issuer,

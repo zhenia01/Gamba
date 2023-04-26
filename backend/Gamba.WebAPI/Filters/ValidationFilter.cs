@@ -39,7 +39,7 @@ public static class ValidationFilter
                 if (!validationResult.IsValid)
                 {
                     return Results.ValidationProblem(validationResult.ToDictionary(),
-                        statusCode: (int)HttpStatusCode.UnprocessableEntity);
+                        statusCode: StatusCodes.Status422UnprocessableEntity);
                 }
             }
         }
