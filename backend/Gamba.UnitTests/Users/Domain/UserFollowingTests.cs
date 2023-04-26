@@ -9,7 +9,7 @@ namespace Gamba.UnitTests.Users.Domain;
 
 public class UserFollowingTests
 {
-    private static User CreateUser() => User.CreateRegistered("name", "password", Mocks.UserUniquenessChecker);
+    private static User CreateUser() => User.CreateRegistered("name123", "password", Mocks.UserUniquenessChecker);
     
     [Fact]
     public void FollowCreator_FollowingNotCreator_ThrowsBusinessException()

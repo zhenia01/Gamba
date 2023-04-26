@@ -10,9 +10,9 @@ public class UserRegistrationTests
     [Fact]
     public void CreateRegistered_User_CreatesValidUser()
     {
-        var user = User.CreateRegistered("name", "password", Mocks.UserUniquenessChecker);
+        var user = User.CreateRegistered("name123", "password", Mocks.UserUniquenessChecker);
 
-        user.Name.Should().Be("name");
+        user.Name.Should().Be("name123");
         user.IsCreator.Should().Be(false);
     }
 }
