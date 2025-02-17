@@ -57,31 +57,20 @@ public class User : Entity, IAggregateRoot
     {
         _followingCreators.Add(UserCreator.AddFollower(this, creator));
     }
-
-    public void AddCreatorTags(IEnumerable<Tag> tags)
+    
+    public void UpdateFavoriteTags(IEnumerable<Tag> tags)
     {
-        CheckRule(new UserMustBeCreatorRule(IsCreator));
-
-        _creatorTags!.AddRange(tags.Where(t => !_creatorTags.Contains(t)));
+        _favoriteTags.Clear();
+        _favoriteTags.AddRange(tags);
     }
     
-    public void AddFavoriteTags(IEnumerable<Tag> tags)
-    {
-        _favoriteTags.AddRange(tags.Where(t => !_favoriteTags.Contains(t)));
-    }
-    
-    public void RemoveCreatorTags(IEnumerable<Tag> tags)
+    public void UpdateCreatorTags(IEnumerable<Tag> tags)
     {
         CheckRule(new UserMustBeCreatorRule(IsCreator));
         
-        _creatorTags?.RemoveAll(tags.Contains);
+        _creatorTags!.Clear();
+        _creatorTags!.AddRange(tags);
     }
     
-    public void RemoveFavoriteTags(IEnumerable<Tag> tags)
-    {
-        _favoriteTags.RemoveAll(tags.Contains);
-    }
-
-
     public bool VerifyPassword(Predicate<string> checker) => checker(_password);
 }

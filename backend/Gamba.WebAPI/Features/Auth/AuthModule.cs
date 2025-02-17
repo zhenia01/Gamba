@@ -1,4 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Security.Claims;
 using Gamba.Application.Users.Common;
 using Gamba.Application.Users.DomainServices;
 using Gamba.Application.Users.GetUserByCredentials;
@@ -8,6 +8,7 @@ using Gamba.Domain.Users;
 using Gamba.Infrastructure.Domain.Users;
 using Gamba.WebAPI.Features.SeedWork;
 using Gamba.WebAPI.Filters;
+using Gamba.WebAPI.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -44,9 +45,9 @@ public class AuthModule: IFeatureModule
         return TypedResults.Created($"/users/{user.Id}", new AuthResponse(user, token));
     }
 
-    private static async Task<Ok<UserDto>> GetCurrentUser(HttpContext httpContext, IMediator dispatcher)
+    private static async Task<Ok<UserDto>> GetCurrentUser(ClaimsPrincipal principal, IMediator dispatcher)
     {
-        var userId = Guid.Parse(httpContext.User.Claims.Single(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+        var userId = principal.GetIdFromClaim();
         var user = await dispatcher.Send(new GetUserByIdQuery(userId));
         return TypedResults.Ok(user);
     }

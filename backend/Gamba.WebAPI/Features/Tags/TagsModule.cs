@@ -1,10 +1,7 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Gamba.Application.Users.Tags.UpdateTags.AddFavoriteTags;
-using Gamba.Domain.Users.Tags;
+﻿using Gamba.Domain.Users;
 using Gamba.WebAPI.Features.SeedWork;
-using Gamba.WebAPI.Filters;
-using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Gamba.WebAPI.Features.Tags.GetTags;
+using Gamba.WebAPI.Features.Tags.UpdateTags;
 
 namespace Gamba.WebAPI.Features.Tags;
 
@@ -17,23 +14,21 @@ public class TagsModule: IFeatureModule
 
     public IEndpointRouteBuilder MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        var favoriteTagsGroup = endpoints
-            .MapGroup("user/tags/favorite");
-        favoriteTagsGroup.MapPatch("/", AddFavoriteTags)
-            .RequireAuthorization();
+        const string basePath = "user/tags";
         
-        // var creatorTagsGroup = endpoints
-        //     .MapGroup("user/tags/creator")
-        //     .RequireAuthorization(p => p.RequireRole("Creator"));
+        var favoriteTagsGroup = endpoints
+            .MapGroup($"{basePath}/favorite")
+            .RequireAuthorization();
+        favoriteTagsGroup.MapPut("/", UpdateFavoriteTagsRequest.Request);
+        favoriteTagsGroup.MapGet("/", GetFavoriteTagsRequest.Request);
+        
+        var creatorTagsGroup = endpoints
+            .MapGroup($"{basePath}/creator")
+            .RequireAuthorization(p => p.RequireRole(UserRoles.Creator));
+        creatorTagsGroup.MapPut("/", UpdateCreatorTagsRequest.Request);
+        creatorTagsGroup.MapGet("/", GetCreatorTagsRequest.Request);
+
 
         return endpoints;
-    }
-    
-    private static async Task<Ok<List<Tag>>> AddFavoriteTags([Validate]AddFavoriteTagsCommand requestBody, HttpContext httpContext, IMediator dispatcher)
-    {
-        var userId = Guid.Parse(httpContext.User.Claims.Single(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
-        requestBody = requestBody with { Id = userId };
-        var tags = await dispatcher.Send(requestBody);
-        return TypedResults.Ok(tags);
     }
 }

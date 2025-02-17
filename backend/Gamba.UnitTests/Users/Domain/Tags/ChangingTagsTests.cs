@@ -15,7 +15,7 @@ public class ChangingTagsTests
     {
         var notCreator = User.CreateRegistered("name123", "password", Mocks.UserUniquenessChecker);
 
-        var addingCreatorTags = () => notCreator.AddCreatorTags(new Tag[]{new ("tag")});
+        var addingCreatorTags = () => notCreator.UpdateCreatorTags(new Tag[]{new ("tag")});
 
         addingCreatorTags
             .Should().Throw<BusinessRuleValidationException>()
@@ -23,40 +23,23 @@ public class ChangingTagsTests
     }
     
     [Fact]
-    public void ChangingTags_WithExactNameForUserWithExistingTag_DoesntChangeTags()
-    {
-        var user = User.CreateRegistered("name123", "password", Mocks.UserUniquenessChecker);
-        user.AddFavoriteTags(new Tag[]{new ("tag"), new ("cat"), new ("dog")});
-
-        var addingExactTag = () => user.AddFavoriteTags(new Tag[]{new ("TAG")});
-
-        user.FavoriteTags.Should().HaveCount(3);
-        addingExactTag();
-        user.FavoriteTags.Should().HaveCount(3);
-    }    
-    
-    [Fact]
     public void ChangingTags_ForUserWithExistingTags_ChangesTags()
     {
         var user = User.CreateRegistered("name123", "password", Mocks.UserUniquenessChecker);
+        var favoriteTags = new Tag[] { new("tag"), new("cat"), new("dog") };
+        var creatorTags = new Tag[] { new("tag"), new("cat"), new("dog") };
         user.UpgradeToCreator();
-        user.AddFavoriteTags(new Tag[]{new ("tag"), new ("cat"), new ("dog")});
-        user.AddCreatorTags(new Tag[]{new ("tag"), new ("cat"), new ("dog")});
+        user.UpdateFavoriteTags(favoriteTags);
+        user.UpdateCreatorTags(creatorTags);
 
-        var addingFavoriteTags = () => user.AddFavoriteTags(new Tag[]{new ("new"), new ("new1")});
-        var addingCreatorTags = () => user.AddCreatorTags(new Tag[]{new ("new"), new ("new1")});
-        var removingFavoriteTags = () => user.RemoveFavoriteTags(new Tag[]{new ("new"), new ("DOG"), new ("cAt")});
-        var removingCreatorTags = () => user.RemoveCreatorTags(new Tag[]{new ("new"), new ("DOG"), new ("cAt")});
+        void UpdatingFavoriteTags() => user.UpdateFavoriteTags(favoriteTags.Concat(new Tag[]{ new("new"), new("new1") }));
+        void UpdatingCreatorTags() => user.UpdateCreatorTags(favoriteTags.Concat(new Tag[] { new("new"), new("new1") }));
 
         user.FavoriteTags.Should().HaveCount(3);
         user.CreatorTags.Should().HaveCount(3);
-        addingCreatorTags();
-        addingFavoriteTags();
+        UpdatingCreatorTags();
+        UpdatingFavoriteTags();
         user.FavoriteTags.Should().HaveCount(5);
         user.CreatorTags.Should().HaveCount(5);
-        removingCreatorTags();
-        removingFavoriteTags();
-        user.FavoriteTags.Should().HaveCount(2);
-        user.CreatorTags.Should().HaveCount(2);
     }
 }

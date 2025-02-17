@@ -15,14 +15,14 @@ public class UserRegistrationTests
     {
         await using var context = TestGambaContextFactory.CreateContext();
         var repository = new UserRepository(context);
-        var user = User.CreateRegistered("name", "password", Mocks.UserUniquenessChecker);
+        var user = User.CreateRegistered("name123", "password", Mocks.UserUniquenessChecker);
 
         await repository.Add(user);
         await repository.SaveChanges();
 
         context.Users.Count().Should().Be(1);
         var savedUser = await repository.GetById(user.Id);
-        savedUser.Name.Should().Be("name");
+        savedUser.Name.Should().Be("name123");
         savedUser.IsCreator.Should().Be(false);
     }
 }
