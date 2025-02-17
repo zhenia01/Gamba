@@ -1,7 +1,5 @@
-﻿using System.Linq.Expressions;
-using Gamba.Application.Configuration.Commands;
+﻿using Gamba.Application.Configuration.Commands;
 using Gamba.Application.Exceptions;
-using Gamba.Application.Users.Tags.UpdateTags.AddFavoriteTags;
 using Gamba.Domain.Users;
 using Gamba.Domain.Users.Tags;
 using Gamba.Infrastructure.Domain.Users;
@@ -26,7 +24,7 @@ public abstract class UpdateTagsCommandHandlerBase<TCommand> : ICommandHandler<T
     public async Task<List<Tag>> Handle(TCommand request, CancellationToken cancellationToken)
     {
         var (userId, tagsToAdd) = request;
-        var user = await _userRepository.GetById(new UserId(userId)) ?? throw new EntityNotFoundException("User's not found");
+        var user = await _userRepository.GetById(new UserId(userId)) ?? throw new EntityNotFoundException("User not found");
         
         TagsAction(user, tagsToAdd.Select(t => new Tag(t)));
 

@@ -32,7 +32,7 @@ public class JwtTokenService
 
         if (user.IsCreator)
         {
-            claims.Add(new(ClaimTypes.Role, "Creator"));
+            claims.Add(new(ClaimTypes.Role, UserRoles.Creator));
         }
 
         var token = new JwtSecurityToken(

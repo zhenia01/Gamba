@@ -2,11 +2,11 @@
 using Gamba.Domain.Users.Tags;
 using Gamba.Infrastructure.Domain.Users;
 
-namespace Gamba.Application.Users.Tags.UpdateTags.AddFavoriteTags;
+namespace Gamba.Application.Users.Tags.UpdateTags.UpdateFavoriteTags;
 
-public class AddFavoriteTagsCommandHandler : UpdateTagsCommandHandlerBase<AddFavoriteTagsCommand>
+public class UpdateFavoriteTagsCommandHandler : UpdateTagsCommandHandlerBase<UpdateFavoriteTagsCommand>
 {
-    public AddFavoriteTagsCommandHandler(
+    public UpdateFavoriteTagsCommandHandler(
         UserRepository userRepository
     ) : base(userRepository)
     {
@@ -14,7 +14,7 @@ public class AddFavoriteTagsCommandHandler : UpdateTagsCommandHandlerBase<AddFav
 
     protected override void TagsAction(User user, IEnumerable<Tag> tags)
     {
-        user.AddFavoriteTags(tags);
+        user.UpdateFavoriteTags(tags);
     }
 
     protected override List<Tag> ResultTagsSelector(User user)

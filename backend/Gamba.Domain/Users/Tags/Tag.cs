@@ -13,7 +13,7 @@ public class Tag : ValueObject
     {
         name = name.Trim();
 
-        MyGuard.Argument(name).MinLength(3).MaxLength(15).Require(n => n.All(char.IsLetterOrDigit));
+        MyGuard.Argument(name).MinLength(3).MaxLength(15).Require(n => n.All(char.IsLetterOrDigit), _ => "Tag should only contain alphanumeric characters");
 
         Name = name;
     }

@@ -18,10 +18,10 @@ const initialState: AuthState = {
 };
 
 type AuthActions = {
-  signIn: (request: SignInRequestDto) => void;
-  signUp: (request: SignUpRequestDto) => void;
+  signIn: (request: SignInRequestDto) => Promise<void>;
+  signUp: (request: SignUpRequestDto) => Promise<void>;
   signOut: () => void;
-  loadCurrentUser: () => void;
+  loadCurrentUser: () => Promise<void>;
 };
 
 const useAuthStore = create<AuthState>()(

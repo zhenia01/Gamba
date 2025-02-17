@@ -1,4 +1,5 @@
 ﻿using Gamba.Infrastructure.Database;
+using Gamba.UnitTests.Users.Infrastructure.Database;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,7 @@ public static class TestGambaContextFactory
         var connection = new SqliteConnection("DataSource=:memory:");
         connection.Open();
         
-        var context = new GambaContext(new DbContextOptionsBuilder<GambaContext>().UseSqlite(connection).Options);
+        var context = new GambaTestContext(new DbContextOptionsBuilder<GambaContext>().UseSqlite(connection).Options);
         context.Database.EnsureCreated(); // context.Database.Migrate();
 
         return context;
