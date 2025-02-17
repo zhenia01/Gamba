@@ -30,7 +30,7 @@ const SignUp = () => {
       isValid,
       errors: { name: nameErrors, password: passwordErrors },
     },
-  } = useForm<SignUpRequestDto>({ mode: 'all' });
+  } = useForm<SignUpRequestDto>({ shouldUseNativeValidation: true });
 
   useEffect(() => {
     if (actionData?.error === 'UserNameMustBeUnique') {
@@ -52,10 +52,7 @@ const SignUp = () => {
         <Input
           type="text"
           placeholder="Name"
-          {...nameValidation}
-          {...register('name', {
-            ...nameValidation,
-          })}
+          {...register('name', { ...nameValidation })}
         />
         <FormErrorMessage>{nameErrors?.message}</FormErrorMessage>
       </FormControl>
@@ -64,12 +61,7 @@ const SignUp = () => {
         isInvalid={!!passwordErrors}
       >
         <FormLabel>Password</FormLabel>
-        <PasswordInput
-          {...passwordValidation}
-          {...register('password', {
-            ...passwordValidation,
-          })}
-        />
+        <PasswordInput {...register('password', { ...passwordValidation })} />
         <FormErrorMessage>{passwordErrors?.message}</FormErrorMessage>
       </FormControl>
       <Button

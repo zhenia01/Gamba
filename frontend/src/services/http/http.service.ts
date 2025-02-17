@@ -12,13 +12,13 @@ type HttpOptions = {
 };
 
 class Http {
-  public static load<T = unknown>(
+  public static async load<T = unknown>(
     url: string,
     options: Partial<HttpOptions> = {},
   ): Promise<T> {
     const {
       method = 'GET',
-      payload = null,
+      payload = undefined,
       contentType = 'application/json',
       hasAuth = true,
       queryParams,
@@ -31,14 +31,21 @@ class Http {
 
     const headers = this.getHeaders(contentType, hasAuth);
 
-    return fetch(this.getUrlWithQueryParams(url, queryParams), {
-      method,
-      headers,
-      body,
-    })
-      .then(this.checkStatus)
-      .then((res) => this.parseJSON<T>(res))
-      .catch(this.throwError);
+    try {
+      const response = await fetch(
+        this.getUrlWithQueryParams(url, queryParams),
+        {
+          method,
+          headers,
+          body,
+        },
+      );
+      const res: Response = await this.checkStatus(response);
+
+      return this.parseJSON<T>(res);
+    } catch (err) {
+      return this.throwError(err);
+    }
   }
 
   private static getHeaders(
@@ -87,7 +94,7 @@ class Http {
     return response.json();
   }
 
-  private static throwError(err: Error): never {
+  private static throwError(err: unknown): never {
     throw err;
   }
 }

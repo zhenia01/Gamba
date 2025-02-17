@@ -22,11 +22,15 @@ function Root() {
   const user = useCurrentUser();
 
   useEffect(() => {
+    async function load() {
+      await authActions.loadCurrentUser();
+    }
+
     if (!didInit) {
       didInit = true;
 
       if (getAuthToken()) {
-        authActions.loadCurrentUser();
+        load();
       }
     }
   }, []);
