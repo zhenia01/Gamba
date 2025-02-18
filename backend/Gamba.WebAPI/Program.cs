@@ -2,7 +2,6 @@ using Gamba.Application.Users.RegisterUser;
 using Gamba.Infrastructure.Database;
 using Gamba.WebAPI.Configuration;
 using Hellang.Middleware.ProblemDetails;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using Gamba.WebAPI.Filters;
@@ -11,9 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddJwtAuth(builder.Configuration);
 
-builder.Services.AddSwagger();
+builder.Services.AddOpenApi();
 
-builder.Services.AddMediatR(typeof(RegisterUserCommandHandler).Assembly);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommandHandler).Assembly));
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserCommand.Validator>(ServiceLifetime.Singleton);
 ValidatorOptions.Global.LanguageManager.Enabled = false;
 
@@ -47,7 +46,7 @@ app.UseProblemDetails();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwaggerDev();
+    app.MapOpenApi();
 }
 
 app.UseAuth();

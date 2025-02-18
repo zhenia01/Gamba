@@ -1,20 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Gamba.Domain\Gamba.Domain.csproj" />
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>11</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gamba.Domain\Gamba.Domain.csproj" />
+  </ItemGroup>
 </Project>

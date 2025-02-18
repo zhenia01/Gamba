@@ -3,6 +3,7 @@ using Gamba.Domain.Users.Tags;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamba.Infrastructure.Domain.Users
 {
@@ -34,15 +35,39 @@ namespace Gamba.Infrastructure.Domain.Users
                 c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                 c => c.ToList());
 
-            user.Property<List<Tag>>(CreatorTagsList)
-                .HasPostgresArrayConversion(t => t.Name, name => new Tag(name))
-                .Metadata
-                .SetValueComparer(valueComparer);
-            user.Property<List<Tag>>(FavoriteTagsList)
-                .HasPostgresArrayConversion(t => t.Name, name => new Tag(name))
-                .HasDefaultValue(new List<Tag>())
-                .Metadata
-                .SetValueComparer(valueComparer);
+            user.PrimitiveCollection(CreatorTagsList)
+                .ElementType()
+                .HasConversion<TagConverter>()
+                // .Metadata
+                // .SetValueComparer(valueComparer)
+                ;
+            
+            user.PrimitiveCollection(FavoriteTagsList)
+                .ElementType()
+                .HasConversion<TagConverter>()
+                // .Metadata
+                // .SetValueComparer(valueComparer)
+                ;
+            
+            
+
+            // user.Property<List<Tag>>(CreatorTagsList)
+            //     .HasPostgresArrayConversion(t => t.Name, name => new Tag(name))
+            //     .Metadata
+            //     .SetValueComparer(valueComparer);
+            // user.Property<List<Tag>>(FavoriteTagsList)
+            //     .HasPostgresArrayConversion(t => t.Name, name => new Tag(name))
+            //     .HasDefaultValue(new List<Tag>())
+            //     .Metadata
+            //     .SetValueComparer(valueComparer);
+        }
+
+        private class TagConverter : ValueConverter<Tag, string>
+        {
+            public TagConverter()
+                : base(tag => tag.Name, s => new Tag(s))
+            {
+            }
         }
     }
 }

@@ -4,7 +4,6 @@ using Gamba.Infrastructure.Domain.Users;
 using Gamba.UnitTests.Users.Infrastructure.TestHelpers;
 using Gamba.UnitTests.Users.TestHelpers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Gamba.UnitTests.Users.Infrastructure;
 

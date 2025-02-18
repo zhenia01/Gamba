@@ -1,14 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Dawn.Guard" Version="1.12.0" />
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>11</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Dawn.Guard" />
+  </ItemGroup>
 </Project>

@@ -1,19 +1,19 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.WebAPI", "Gamba.WebAPI\Gamba.WebAPI.csproj", "{E2233782-8CAE-49F3-AC21-0A2E7575C2A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gamba.WebAPI", "Gamba.WebAPI\Gamba.WebAPI.csproj", "{E2233782-8CAE-49F3-AC21-0A2E7575C2A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.Infrastructure", "Gamba.Infrastructure\Gamba.Infrastructure.csproj", "{204D6965-2489-40FF-B478-D345B7EB80E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gamba.Infrastructure", "Gamba.Infrastructure\Gamba.Infrastructure.csproj", "{204D6965-2489-40FF-B478-D345B7EB80E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.Application", "Gamba.Application\Gamba.Application.csproj", "{4E95D546-85C3-47DA-BB29-1EC93AEE440F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gamba.Application", "Gamba.Application\Gamba.Application.csproj", "{4E95D546-85C3-47DA-BB29-1EC93AEE440F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{10C8187B-696D-45B6-96EF-C92DF1E2E1AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.UnitTests", "Gamba.UnitTests\Gamba.UnitTests.csproj", "{44013103-B8D0-44BE-B43A-A4D271DA1707}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gamba.UnitTests", "Gamba.UnitTests\Gamba.UnitTests.csproj", "{44013103-B8D0-44BE-B43A-A4D271DA1707}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamba.Domain", "Gamba.Domain\Gamba.Domain.csproj", "{F1E1CA0B-ADFE-4082-B3CD-F6F9BF5017F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gamba.Domain", "Gamba.Domain\Gamba.Domain.csproj", "{F1E1CA0B-ADFE-4082-B3CD-F6F9BF5017F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
